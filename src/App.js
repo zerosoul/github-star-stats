@@ -1,18 +1,34 @@
-import React, { lazy, Suspense } from 'react';
-import Loading from './components/Loading';
-const Header = lazy(() => import('./components/Header'));
-const Footer = lazy(() => import('./components/Footer'));
-import styled from 'styled-components';
-const StyledBody = styled.section`
-  height: 60vh;
+import React from 'react';
+
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+
+const EXCHANGE_RATES = gql`
+  query {
+    repository(name: "chinese-colors", owner: "zerosoul") {
+      createdAt
+      stargazers(first: 100) {
+        nodes {
+          id
+          login
+          name
+          websiteUrl
+        }
+        totalCount
+      }
+    }
+  }
 `;
 const App = () => {
-  return (
-    <Suspense fallback={<Loading />}>
-      <Header />
-      <StyledBody>body</StyledBody>
-      <Footer />
-    </Suspense>
-  );
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+  return data.rates.map(({ currency, rate }) => (
+    <div key={currency}>
+      <p>
+        {currency}: {rate}
+      </p>
+    </div>
+  ));
 };
 export default App;
