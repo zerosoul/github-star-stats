@@ -1,34 +1,55 @@
 import React from 'react';
 
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useStars, useLimit } from './hooks';
 
-const EXCHANGE_RATES = gql`
-  query {
-    repository(name: "chinese-colors", owner: "zerosoul") {
-      createdAt
-      stargazers(first: 100) {
-        nodes {
-          id
-          login
-          name
-          websiteUrl
-        }
-        totalCount
-      }
-    }
-  }
-`;
 const App = () => {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-  return data.rates.map(({ currency, rate }) => (
-    <div key={currency}>
-      <p>
-        {currency}: {rate}
-      </p>
-    </div>
-  ));
+  const { loadStars, data, loading } = useStars();
+  const { loading: lLoading, error: lError } = useLimit();
+  if (lLoading) return <p>Loading...</p>;
+  if (lError) return <p>Error :(</p>;
+  console.log({ data });
+
+  return (
+    <>
+      <button
+        disabled={loading}
+        onClick={() => {
+          loadStars();
+        }}
+      >
+        load stars
+      </button>
+      {!loading && <span>共{data.total}</span>}
+      <table>
+        <thead>
+          <tr>
+            <td>关注日期</td>
+            <td>新增关注数</td>
+            <td>用户</td>
+          </tr>
+        </thead>
+        <tbody>
+          {!loading &&
+            Object.entries(data).map(([date, { count, users }]) => {
+              if (date !== 'total') {
+                return (
+                  <tr key={date}>
+                    <td>{date}</td>
+                    <td>{count}</td>
+                    <td>
+                      {users
+                        .map(({ login }) => {
+                          return login;
+                        })
+                        .join(',')}
+                    </td>
+                  </tr>
+                );
+              }
+            })}
+        </tbody>
+      </table>
+    </>
+  );
 };
 export default App;
