@@ -6,7 +6,7 @@ const STARS = gql`
   query GetStars($name: String!, $owner: String!, $after: String) {
     repository(name: $name, owner: $owner) {
       createdAt
-      stargazers(first: 7, after: $after) {
+      stargazers(first: 100, after: $after) {
         edges {
           node {
             id
@@ -27,7 +27,7 @@ const STARS = gql`
   }
 `;
 const DefaultVars = {
-  name: 'static-site-data-management',
+  name: 'chinese-colors',
   owner: 'zerosoul'
 };
 export function useStars() {
@@ -50,7 +50,11 @@ export function useStars() {
         edges.forEach(({ node, starredAt }) => {
           let dateObj = new Date(starredAt);
           let keyVal = `${dateObj.getFullYear()}/${dateObj.getMonth() + 1}/${dateObj.getDate()}`;
-          tmpObj[keyVal] = oldData[keyVal] || null;
+          tmpObj[keyVal] = tmpObj[keyVal]
+            ? tmpObj[keyVal]
+            : oldData[keyVal]
+            ? oldData[keyVal]
+            : null;
           if (tmpObj[keyVal]) {
             tmpObj[keyVal].count = tmpObj[keyVal].count + 1;
             tmpObj[keyVal].users = [...tmpObj[keyVal].users, { ...node, starredAt }];
