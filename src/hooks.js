@@ -29,7 +29,7 @@ const STARS = gql`
 export function useStars() {
   const [loading, setLoading] = useState(false);
   const [finished, setFinished] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(undefined);
   const [loadStars, { called, data: pageData, variables, error }] = useLazyQuery(STARS);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export function useStars() {
       const { stargazers } = pageData.repository;
       const { edges, totalCount } = stargazers;
       const { hasNextPage, endCursor } = stargazers.pageInfo;
-      setData(oldData => {
+      setData((oldData = {}) => {
         const tmpObj = {};
         edges.forEach(({ node, starredAt }) => {
           let dateObj = new Date(starredAt);
@@ -76,6 +76,8 @@ export function useStars() {
     }
   }, [pageData, loadStars, called, variables]);
   const startLoadStars = ({ owner, name }) => {
+    setData(undefined);
+    setFinished(false);
     loadStars({
       variables: {
         owner,

@@ -1,7 +1,7 @@
 {
-  "name": "react-starter",
+  "name": "awesome-github-repo-star",
   "version": "1.0.0",
-  "description": "React webapp starter",
+  "description": "Awesome githu repo star tool",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,12 +15,12 @@
     "url": "git+https://github.com/zerosoul/react-starter.git"
   },
   "keywords": [
-    "css3",
-    "template",
-    "react",
-    "frontend",
+    "github",
+    "star",
     "tool",
-    "amazing"
+    "react",
+    "repo",
+    "awesome"
   ],
   "author": "tristan",
   "license": "ISC",

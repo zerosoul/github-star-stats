@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   ResponsiveContainer,
-  BarChart,
+  AreaChart as Chart,
   Brush,
-  Bar,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -21,18 +21,18 @@ import {
 
 // ];
 
-export default function Bars({ data }) {
+export default function AreaChart({ data }) {
   return (
     <ResponsiveContainer width="90%" height={500}>
-      <BarChart data={data}>
+      <Chart data={data}>
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="star" fill="#413ea0" />
+        <Area type="step" dataKey="star" stroke="#8884d8" fill="#8884d8" />
         {data.length > 20 && <Brush dataKey="date" height={30} stroke="#8884d8" />}
-      </BarChart>
+      </Chart>
     </ResponsiveContainer>
   );
 }

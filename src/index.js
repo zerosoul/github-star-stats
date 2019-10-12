@@ -12,13 +12,13 @@ import zhCN from 'antd/es/locale/zh_CN';
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = 'd6bcf9ccaf571bbae2bb21a773036f8d304153d2';
+  const token = '5626c7a3303443cfe92958e525c030e8c9f5abdf';
   // const token = localStorage.getItem('AUTH_TOKEN');
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Bearer ${token}` : ''
+      authorization: token ? `Bearer ${token}` : ''
     }
   };
 });

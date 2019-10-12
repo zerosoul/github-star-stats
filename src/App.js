@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Tabs, Icon, message } from 'antd';
 import { useStars } from './hooks';
-import { getSparklinesData, getAvators, getChartData } from './utils';
+import { getAvators, getChartData } from './utils';
 import Header from './components/Header';
 import AvatorWall from './components/AvatorWall';
-import Bars from './components/Sparklines/Bars';
 import ChartBars from './components/Recharts/Bars';
 import ChartLines from './components/Recharts/Lines';
-import Lines from './components/Sparklines/Lines';
+import ChartArea from './components/Recharts/Area';
 const { TabPane } = Tabs;
 const ChartWrapper = styled.section`
-  width: 20rem;
+  width: 100%;
   margin: 0 auto;
+  overflow-x: scroll;
 `;
 const StyledTabs = styled(Tabs)`
   margin: 1rem 3rem;
@@ -25,8 +25,11 @@ const App = () => {
   useEffect(() => {
     if (error) {
       let tmpMsg = '';
-      const { graphQLErrors } = error;
-      switch (graphQLErrors[0].type) {
+      const { graphQLErrors, networkError } = error;
+      switch ((graphQLErrors.length && graphQLErrors[0].type) || networkError.statusCode) {
+        case 401:
+          tmpMsg = 'Github API Unauthorized!';
+          break;
         case 'NOT_FOUND':
           tmpMsg = 'No result, check inputs please!';
           break;
@@ -42,21 +45,36 @@ const App = () => {
   return (
     <>
       {errMsg && message.error(errMsg)}
+      {finished && message.success('Awesome data ready!')}
       <Header loading={loading} loadStars={startLoadStars} />
       <StyledTabs defaultActiveKey="1">
         <TabPane
           tab={
             <span>
-              <Icon type="stock" />
-              Sparklines
+              <Icon type="bar-chart" />
+              Bar Chart
             </span>
           }
           key="1"
         >
-          {finished && (
+          {data && (
             <ChartWrapper>
-              <Lines data={getSparklinesData(data)} />
-              <Bars data={getSparklinesData(data)} />
+              <ChartBars data={getChartData(data)} />
+            </ChartWrapper>
+          )}
+        </TabPane>
+        <TabPane
+          tab={
+            <span>
+              <Icon type="line-chart" />
+              Line Chart
+            </span>
+          }
+          key="2"
+        >
+          {data && (
+            <ChartWrapper>
+              <ChartLines data={getChartData(data)} />
             </ChartWrapper>
           )}
         </TabPane>
@@ -64,15 +82,14 @@ const App = () => {
           tab={
             <span>
               <Icon type="area-chart" />
-              Recharts
+              Area Chart
             </span>
           }
-          key="2"
+          key="3"
         >
-          {finished && (
+          {data && (
             <ChartWrapper>
-              <ChartBars data={getChartData(data)} />
-              <ChartLines data={getChartData(data)} />
+              <ChartArea data={getChartData(data)} />
             </ChartWrapper>
           )}
         </TabPane>

@@ -47,7 +47,7 @@ export default function AvatorWall({ total, avators }) {
             <a target="_blank" href={`//github.com/${login}`} key={url}>
               <Tooltip placement="topLeft" title={name}>
                 <Avatar
-                  title={`//github.com/${login}`}
+                  title={`https://github.com/${login}`}
                   alt={name}
                   onMouseOver={handleEnter}
                   onMouseLeave={handleOut}

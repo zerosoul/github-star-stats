@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Divider, Input } from 'antd';
 import styled from 'styled-components';
-const InputGroup = Input.Group;
 const Wrapper = styled.header`
   padding: 1rem 3rem;
   display: flex;
@@ -18,54 +17,46 @@ const Wrapper = styled.header`
     width: 100%;
   }
 `;
-export default function Header({
-  name = 'yangerxiao.com',
-  owner = 'zerosoul',
-  loading,
-  loadStars
-}) {
-  const [user, setUser] = useState(owner);
-  const [repo, setRepo] = useState(name);
+export default function Header({ loading, loadStars }) {
+  const [repo, setRepo] = useState(null);
 
   const handleChange = ({ target }) => {
-    const { value, name } = target;
-    console.log({ value, name });
-    if (name == 'owner') {
-      setUser(value);
+    const { value } = target;
+    if (value) {
+      try {
+        let url = new URL(value);
+        if (url.protocol.indexOf('http') > -1) {
+          // eslint-disable-next-line no-unused-vars
+          let [unused, owner, name] = url.pathname.split('/');
+          setRepo({ owner, name });
+          console.log({ url });
+        }
+      } catch (error) {
+        console.log(error);
+        setRepo(null);
+      }
     } else {
-      setRepo(value);
+      setRepo(null);
     }
   };
   return (
     <Wrapper>
-      <h1>⭐️ Github Repo Star Statistics Tool ️️⭐️</h1>
+      <h1>⭐️ Awesome Star Statistics Tool ️️⭐️</h1>
       <div className="opts">
-        <InputGroup style={{ width: '70%' }}>
-          <Input
-            placeholder="Github用户名"
-            required
-            onChange={handleChange}
-            style={{ width: '40%' }}
-            name={'owner'}
-            value={user}
-            defaultValue={'zerosoul'}
-          />
-          <Input
-            onChange={handleChange}
-            placeholder="仓库名"
-            required
-            value={repo}
-            style={{ width: '60%' }}
-            name="name"
-            defaultValue={'yangerxiao.com'}
-          />
-        </InputGroup>
+        <Input
+          placeholder="eg: https://github.com/zerosoul/tech-logo-memo-game"
+          required
+          onChange={handleChange}
+          style={{ width: '80%' }}
+        />
         <Button
           type="primary"
           loading={loading}
-          disabled={!(user && repo)}
+          disabled={!repo}
           onClick={() => {
-            loadStars({ owner: user, name: repo });
+            console.log({ repo });
+
+            loadStars(repo);
           }}
         >
           Awesome!
