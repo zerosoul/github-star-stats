@@ -26,18 +26,11 @@ const STARS = gql`
     }
   }
 `;
-const DefaultVars = {
-  name: 'chinese-colors',
-  owner: 'zerosoul'
-};
 export function useStars() {
   const [loading, setLoading] = useState(false);
+  const [finished, setFinished] = useState(false);
   const [data, setData] = useState([]);
-  const [loadStars, { called, data: pageData }] = useLazyQuery(STARS, {
-    variables: {
-      ...DefaultVars
-    }
-  });
+  const [loadStars, { called, data: pageData, variables, error }] = useLazyQuery(STARS);
 
   useEffect(() => {
     if (pageData) {
@@ -50,6 +43,7 @@ export function useStars() {
         edges.forEach(({ node, starredAt }) => {
           let dateObj = new Date(starredAt);
           let keyVal = `${dateObj.getFullYear()}/${dateObj.getMonth() + 1}/${dateObj.getDate()}`;
+          // 考虑老数据可能有相同key
           tmpObj[keyVal] = tmpObj[keyVal]
             ? tmpObj[keyVal]
             : oldData[keyVal]
@@ -68,18 +62,28 @@ export function useStars() {
       if (hasNextPage) {
         loadStars({
           variables: {
-            ...DefaultVars,
+            ...variables,
             after: endCursor
           }
         });
       } else {
         setLoading(false);
+        setFinished(true);
       }
     } else if (called) {
       setLoading(true);
+      setFinished(false);
     }
-  }, [pageData, loadStars, called]);
-  return { loadStars, data, pageData, loading };
+  }, [pageData, loadStars, called, variables]);
+  const startLoadStars = ({ owner, name }) => {
+    loadStars({
+      variables: {
+        owner,
+        name
+      }
+    });
+  };
+  return { startLoadStars, data, loading, finished, error };
 }
 
 export function useLimit() {

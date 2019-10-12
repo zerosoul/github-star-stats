@@ -40,6 +40,23 @@ module.exports = {
             exclude: /node_modules/,
             use: 'happypack/loader'
           },
+          {
+            test: /\.less$/,
+            use: [
+              {
+                loader: 'style-loader' // creates style nodes from JS strings
+              },
+              {
+                loader: 'css-loader' // translates CSS into CommonJS
+              },
+              {
+                loader: 'less-loader',
+                options: {
+                  javascriptEnabled: true
+                } // compiles Less to CSS
+              }
+            ]
+          },
           // file-loader将所有静态文件可被WebpackDevServer伺服
           // 生产环境，这些静态文件会被拷贝到build目录
           // 之所以不用 test ，是为了能够处理被上面的 loader 漏掉的文件

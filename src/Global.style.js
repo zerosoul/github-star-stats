@@ -5,11 +5,9 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
   *{
     box-sizing:border-box;
-    user-select:none;
     outline:none;
     -webkit-text-size-adjust: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    color:#ffffeb;
   }
   html{
     -webkit-font-smoothing: antialiased;
@@ -25,7 +23,6 @@ const GlobalStyle = createGlobalStyle`
   }
   #root{
     min-height:100vh;
-    background-image:linear-gradient(135deg, rgb(96, 108, 136) 0%, rgb(63, 76, 107) 100%);
   }
 
   @media screen and (min-width: 320px){

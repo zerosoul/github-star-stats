@@ -30,6 +30,7 @@
   "homepage": "https://zerosoul.github.io/react-starter",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.2",
+    "antd": "^3.23.6",
     "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
@@ -38,6 +39,8 @@
     "graphql": "^14.5.8",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-sparklines": "^1.7.0",
+    "recharts": "^1.7.1",
     "styled-components": "^4.4.0",
     "styled-reset": "^4.0.2"
   },
@@ -54,6 +57,7 @@
     "autodll-webpack-plugin": "^0.4.2",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.12.2",
     "css-loader": "^3.2.0",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
@@ -66,6 +70,8 @@
     "husky": "^3.0.8",
     "installed-check-core": "^3.0.0",
     "interpolate-html-plugin": "^3.0.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "lint-staged": "^9.4.2",
     "mini-css-extract-plugin": "^0.8.0",
     "prettier": "^1.17.1",
