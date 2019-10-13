@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/zerosoul/awesome-repo-star-view/issues"
   },
-  "homepage": "https://zerosoul.github.io/awesome-repo-star-view",
+  "homepage": "https://stars.yangerxiao.com",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.2",
     "@ungap/url-search-params": "^0.1.2",
