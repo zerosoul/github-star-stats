@@ -24,7 +24,8 @@ export default function DownloadSVG({ title = 'wtf title', svg }) {
     console.log({ svg });
 
     if (svg) {
-      // let svg = svg.current.container.querySelector('svg');
+      const titleSize = window.innerWidth > 800 ? 34 : 20;
+      const fromSize = window.innerWidth > 800 ? 20 : 12;
       let canvas = document.createElement('canvas');
       console.log({ svg });
       svg.currentScale = scaleRatio;
@@ -36,12 +37,19 @@ export default function DownloadSVG({ title = 'wtf title', svg }) {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = 'black';
-      ctx.lineWidth = 3;
-      ctx.font = '30px verdana';
-      ctx.fillText(title, 40, 40);
-      ctx.font = '12px verdana';
-      ctx.fillText(`Generated from: fdsaf.com?repo=${title}`, 40, canvas.height - 40);
-      ctx.fillText(`Twitter: @wsygc`, 40, canvas.height - 20);
+      ctx.font = `${titleSize}px verdana`;
+      const x = canvas.width / 2;
+      ctx.textAlign = 'center';
+      ctx.fillText(title, x, 40);
+
+      ctx.textAlign = 'left';
+
+      ctx.font = `${fromSize}px verdana`;
+      ctx.fillStyle = '#ccc';
+      ctx.fillText(`Generated from:`, 40, canvas.height - 60);
+      ctx.fillText(`works.yangerxiao.com/awesome-repo-star-view`, 40, canvas.height - 40);
+      ctx.fillStyle = '#1890ff';
+      ctx.fillText(`Twitter: @wsygc`, 40, canvas.height - 20, canvas.width - 40);
       let data = new XMLSerializer().serializeToString(svg);
       let DOMURL = window.URL || window.webkitURL || window;
 

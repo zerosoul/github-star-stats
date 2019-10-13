@@ -18,12 +18,11 @@ import {
 //     pv: 800,
 //     amt: 1400
 //   },
-
 // ];
 
 export default function AreaChart({ data }) {
   return (
-    <ResponsiveContainer width="90%" height={500}>
+    <ResponsiveContainer width="100%" height={500}>
       <Chart data={data}>
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis dataKey="date" />

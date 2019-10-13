@@ -8,6 +8,8 @@ const Wrapper = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 34rem;
+  margin: 0 auto;
   > h1 {
     font-size: 1.2rem;
     font-weight: 800;
