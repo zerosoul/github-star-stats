@@ -6,6 +6,8 @@ const commonConfig = require('./webpack.config.common');
 // 为方便配置，以根目录为本地服务器地址
 const publicPath = '/';
 
+console.log('dddddd', process.env);
+
 // 下面是development的webpack配置
 // 为了更好的开发体验，会专注于更快的构建速度
 module.exports = merge(commonConfig, {
@@ -57,7 +59,8 @@ module.exports = merge(commonConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development')
+        NODE_ENV: JSON.stringify('development'),
+        G_TOKEN: JSON.stringify(process.env.GITHUB_TOKEN)
       }
     }),
     // Add module names to factory functions so they appear in browser profiler.

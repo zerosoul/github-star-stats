@@ -9,10 +9,12 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { ConfigProvider } from 'antd';
 // 由于 antd 组件的默认文案是英文，所以需要修改为中文
 import zhCN from 'antd/es/locale/zh_CN';
+console.log(process.env);
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = 'c99debb9a9c5bbc6c067832c2146be3472a5de07';
+  // 开发环境从根目录 .env.development.local 读取
+  const token = process.env.G_TOKEN || '';
   // const token = localStorage.getItem('AUTH_TOKEN');
   // return the headers to the context so httpLink can read them
   return {

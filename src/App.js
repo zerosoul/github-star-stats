@@ -5,7 +5,10 @@ import { getAvators, getQueryValue } from './utils';
 import Header from './components/Header';
 import Tabs from './containers/Tabs';
 import AvatorWall from './components/AvatorWall';
-
+message.config({
+  duration: 2,
+  maxCount: 1
+});
 const App = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [url, setUrl] = useState('');
@@ -45,7 +48,10 @@ const App = () => {
 
   return (
     <>
-      {errMsg && message.error(errMsg)}
+      {errMsg &&
+        message.error(errMsg, () => {
+          setErrMsg(null);
+        })}
       {finished && message.success('Awesome data ready!')}
       <Header
         url={url}

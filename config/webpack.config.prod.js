@@ -40,7 +40,8 @@ module.exports = merge(commonConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production')
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
+        G_TOKEN: JSON.stringify(process.env.GITHUB_TOKEN)
       }
     }),
     new webpack.NamedChunksPlugin(),

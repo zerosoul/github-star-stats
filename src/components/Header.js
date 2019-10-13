@@ -44,18 +44,20 @@ export default function Header({ url = '', loading, loadStars, getTotal, total }
       <h1>⭐️ Awesome Star Statistics Tool ️️⭐️</h1>
       <Badge
         style={{ backgroundColor: '#87d068' }}
-        count={total}
+        count={repo ? total : 0}
         overflowCount={Number.POSITIVE_INFINITY}
       >
         <Search
+          allowClear
           value={input}
           addonBefore={'URL'}
           placeholder="eg: https://github.com/zerosoul/PIW"
           enterButton="Awesome"
           onChange={handleChange}
           disabled={loading}
-          onSearch={() => {
-            console.log({ repo });
+          onSearch={val => {
+            if (!val) return;
+            console.log({ repo, val });
             if (!repo) {
               message.warning('URL invalid');
               return;
