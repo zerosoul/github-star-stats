@@ -55,6 +55,7 @@ const App = () => {
         })}
       {finished && message.success('Awesome data ready!')}
       <Header
+        finished={finished}
         url={url}
         total={total}
         loading={loading}

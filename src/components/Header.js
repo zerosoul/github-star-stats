@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { getRepo } from '../utils';
 const { Search } = Input;
 const Wrapper = styled.header`
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,7 @@ const Wrapper = styled.header`
     top: 20;
   }
 `;
-export default function Header({ url = '', loading, loadStars, getTotal, total }) {
+export default function Header({ url = '', loading, finished, loadStars, getTotal, total }) {
   const [repo, setRepo] = useState(null);
   const [input, setInput] = useState(url);
   useEffect(() => {
@@ -53,6 +53,9 @@ export default function Header({ url = '', loading, loadStars, getTotal, total }
           onChange={handleChange}
           disabled={loading}
           onSearch={val => {
+            if (!val && finished) {
+              return;
+            }
             if (!val) {
               message.warning('Please input a github repo URL');
               return;

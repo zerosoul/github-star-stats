@@ -10,13 +10,13 @@ import { getChartData, getPercent } from '../utils';
 
 const StyledTabs = styled(Tabs)`
   &.ant-tabs {
-    margin: 1rem;
+    margin: 0rem 2rem;
     min-height: 70vh;
     hgroup {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 3rem 0;
+      margin: 0;
       img {
         margin-bottom: 1rem;
         width: 16rem;
@@ -36,6 +36,10 @@ const StyledTabs = styled(Tabs)`
   .tips {
     display: flex;
     margin-top: 0.5rem;
+    &.pc {
+      justify-content: flex-end;
+      padding: 0 1rem;
+    }
     .divide {
       width: 0.5rem;
     }
@@ -61,7 +65,7 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
   const [svgEle, setSvgEle] = useState(null);
   const percent = getPercent(data);
   console.log({ percent });
-
+  const isMobile = window.innerWidth < 751 ? true : false;
   useEffect(() => {
     console.log({ active });
     if (data) {
@@ -72,7 +76,7 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
     }
   }, [active, data]);
   const DownloadBtn = (
-    <div className="tips">
+    <div className={`tips ${isMobile ? '' : 'pc'}`}>
       {!(percent == 0 || percent == 100) ? (
         <Progress
           type="circle"
@@ -96,6 +100,7 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
       }}
       activeKey={`${active || activeTab}`}
       tabBarExtraContent={DownloadBtn}
+      tabPosition={isMobile ? 'top' : 'left'}
     >
       <TabPane
         tab={

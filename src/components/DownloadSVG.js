@@ -70,5 +70,13 @@ export default function DownloadSVG({ title = 'wtf title', svg }) {
       img.src = url;
     }
   };
-  return <Button shape="circle" icon="download" size={'small'} onClick={handleClick}></Button>;
+  return (
+    <Button
+      type="primary"
+      shape="circle"
+      icon="download"
+      size={'big'}
+      onClick={handleClick}
+    ></Button>
+  );
 }

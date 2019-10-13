@@ -3,7 +3,7 @@ import { Avatar, List, Tooltip, Divider, Badge } from 'antd';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-  margin: 1rem 3rem;
+  margin: 1rem 1.5rem;
   h2 {
     display: flex;
     align-items: center;
