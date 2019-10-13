@@ -1,7 +1,7 @@
 {
-  "name": "awesome-github-repo-star",
+  "name": "awesome-repo-star-view",
   "version": "1.0.0",
-  "description": "Awesome githu repo star tool",
+  "description": "Awesome github repo star tool",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zerosoul/react-starter.git"
+    "url": "git+https://github.com/zerosoul/awesome-repo-star-view.git"
   },
   "keywords": [
     "github",
@@ -25,9 +25,9 @@
   "author": "tristan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zerosoul/react-starter/issues"
+    "url": "https://github.com/zerosoul/awesome-repo-star-view/issues"
   },
-  "homepage": "https://zerosoul.github.io/react-starter",
+  "homepage": "https://zerosoul.github.io/awesome-repo-star-view",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.2",
     "@ungap/url-search-params": "^0.1.2",
