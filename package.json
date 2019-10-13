@@ -30,6 +30,7 @@
   "homepage": "https://zerosoul.github.io/react-starter",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.2",
+    "@ungap/url-search-params": "^0.1.2",
     "antd": "^3.23.6",
     "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.3",

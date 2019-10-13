@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { Button, Divider, Input } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Divider, Input, Badge, message } from 'antd';
 import styled from 'styled-components';
+import { getRepo } from '../utils';
+const { Search } = Input;
 const Wrapper = styled.header`
   padding: 1rem 3rem;
   display: flex;
@@ -11,57 +13,58 @@ const Wrapper = styled.header`
     font-weight: 800;
     margin-bottom: 1rem;
   }
-  .opts {
-    display: flex;
-    justify-content: space-evenly;
+  .ant-badge {
     width: 100%;
+    position: sticky;
+    top: 20;
   }
 `;
-export default function Header({ loading, loadStars }) {
+export default function Header({ url = '', loading, loadStars, getTotal, total }) {
   const [repo, setRepo] = useState(null);
-
+  const [input, setInput] = useState(url);
+  useEffect(() => {
+    if (url) {
+      let tmpRepo = getRepo(url);
+      setRepo(tmpRepo);
+      setInput(url);
+    }
+  }, [url]);
   const handleChange = ({ target }) => {
     const { value } = target;
-    if (value) {
-      try {
-        let url = new URL(value);
-        if (url.protocol.indexOf('http') > -1) {
-          // eslint-disable-next-line no-unused-vars
-          let [unused, owner, name] = url.pathname.split('/');
-          setRepo({ owner, name });
-          console.log({ url });
-        }
-      } catch (error) {
-        console.log(error);
-        setRepo(null);
-      }
-    } else {
-      setRepo(null);
+    let tmpRepo = getRepo(value);
+    setRepo(tmpRepo);
+    if (tmpRepo) {
+      getTotal(tmpRepo);
     }
+    console.log({ tmpRepo });
+    setInput(value);
   };
   return (
     <Wrapper>
       <h1>⭐️ Awesome Star Statistics Tool ️️⭐️</h1>
-      <div className="opts">
-        <Input
-          placeholder="eg: https://github.com/zerosoul/tech-logo-memo-game"
-          required
+      <Badge
+        style={{ backgroundColor: '#87d068' }}
+        count={total}
+        overflowCount={Number.POSITIVE_INFINITY}
+      >
+        <Search
+          value={input}
+          addonBefore={'URL'}
+          placeholder="eg: https://github.com/zerosoul/PIW"
+          enterButton="Awesome"
           onChange={handleChange}
-          style={{ width: '80%' }}
-        />
-        <Button
-          type="primary"
-          loading={loading}
-          disabled={!repo}
-          onClick={() => {
+          disabled={loading}
+          onSearch={() => {
             console.log({ repo });
-
+            if (!repo) {
+              message.warning('URL invalid');
+              return;
+            }
             loadStars(repo);
           }}
-        >
-          Awesome!
-        </Button>
-      </div>
+        />
+      </Badge>
+
       <Divider />
     </Wrapper>
   );

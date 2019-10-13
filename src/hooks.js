@@ -26,11 +26,23 @@ const STARS = gql`
     }
   }
 `;
+
+const STARS_TOTAL = gql`
+  query GetStarTotalCount($name: String!, $owner: String!) {
+    repository(name: $name, owner: $owner) {
+      stargazers {
+        totalCount
+      }
+    }
+  }
+`;
 export function useStars() {
   const [loading, setLoading] = useState(false);
   const [finished, setFinished] = useState(false);
+  const [repo, setRepo] = useState(null);
   const [data, setData] = useState(undefined);
   const [loadStars, { called, data: pageData, variables, error }] = useLazyQuery(STARS);
+  const [getTotal, { data: totalData }] = useLazyQuery(STARS_TOTAL);
 
   useEffect(() => {
     if (pageData) {
@@ -78,6 +90,7 @@ export function useStars() {
   const startLoadStars = ({ owner, name }) => {
     setData(undefined);
     setFinished(false);
+    setRepo({ owner, name });
     loadStars({
       variables: {
         owner,
@@ -85,7 +98,26 @@ export function useStars() {
       }
     });
   };
-  return { startLoadStars, data, loading, finished, error };
+  const getTotalCount = ({ owner, name }) => {
+    setData(undefined);
+    setFinished(false);
+    getTotal({
+      variables: {
+        owner,
+        name
+      }
+    });
+  };
+  return {
+    getTotalCount,
+    startLoadStars,
+    repo,
+    data,
+    total: (totalData && totalData.repository.stargazers.totalCount) || null,
+    loading: loading && !error,
+    finished,
+    error
+  };
 }
 
 export function useLimit() {

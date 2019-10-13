@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   ResponsiveContainer,
   BarChart,
@@ -22,17 +22,20 @@ import {
 // ];
 
 export default function Bars({ data }) {
+  const container = useRef(null);
   return (
-    <ResponsiveContainer width="90%" height={500}>
-      <BarChart data={data}>
-        <CartesianGrid stroke="#f5f5f5" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="star" fill="#413ea0" />
-        {data.length > 20 && <Brush dataKey="date" height={30} stroke="#8884d8" />}
-      </BarChart>
-    </ResponsiveContainer>
+    <>
+      <ResponsiveContainer ref={container} width="90%" height={500}>
+        <BarChart data={data}>
+          <CartesianGrid stroke="#f5f5f5" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="star" fill="#413ea0" />
+          {data.length > 20 && <Brush dataKey="date" height={30} stroke="#8884d8" />}
+        </BarChart>
+      </ResponsiveContainer>
+    </>
   );
 }

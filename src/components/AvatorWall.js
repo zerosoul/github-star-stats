@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Tooltip, Divider, Badge } from 'antd';
+import { Avatar, List, Tooltip, Divider, Badge } from 'antd';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
@@ -19,6 +19,9 @@ const Wrapper = styled.section`
       transform: scale(1.5);
     }
   }
+  .ant-list-pagination {
+    text-align: left;
+  }
 `;
 export default function AvatorWall({ total, avators }) {
   const handleEnter = ({ target }) => {
@@ -37,27 +40,42 @@ export default function AvatorWall({ total, avators }) {
     <Wrapper>
       <h2>
         <span className="txt">Total: </span>
-        <Badge style={{ backgroundColor: '#52c41a' }} overflowCount={2000} count={total} />
+        <Badge
+          style={{ backgroundColor: '#52c41a' }}
+          overflowCount={Number.POSITIVE_INFINITY}
+          count={total}
+        />
       </h2>
       <Divider />
-      <div className="avatars">
-        {avators.map(({ login, name, url }) => {
-          return (
-            // eslint-disable-next-line react/jsx-no-target-blank
-            <a target="_blank" href={`//github.com/${login}`} key={url}>
-              <Tooltip placement="topLeft" title={name}>
-                <Avatar
-                  title={`https://github.com/${login}`}
-                  alt={name}
-                  onMouseOver={handleEnter}
-                  onMouseLeave={handleOut}
-                  src={url}
-                ></Avatar>
-              </Tooltip>
-            </a>
-          );
-        })}
-      </div>
+      <List
+        pagination={
+          avators.length > 100
+            ? {
+                size: 'small',
+                onChange: page => {
+                  console.log(page);
+                },
+                pageSize: 96
+              }
+            : false
+        }
+        grid={{ column: 24, sm: 12 }}
+        dataSource={avators}
+        renderItem={({ login, name, url }) => (
+          // eslint-disable-next-line react/jsx-no-target-blank
+          <a target="_blank" href={`//github.com/${login}`} key={url}>
+            <Tooltip placement="topLeft" title={name}>
+              <Avatar
+                title={`https://github.com/${login}`}
+                alt={name}
+                onMouseOver={handleEnter}
+                onMouseLeave={handleOut}
+                src={url}
+              ></Avatar>
+            </Tooltip>
+          </a>
+        )}
+      />
     </Wrapper>
   );
 }
