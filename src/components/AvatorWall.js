@@ -39,7 +39,7 @@ export default function AvatorWall({ total, avators }) {
   return (
     <Wrapper>
       <h2>
-        <span className="txt">Total: </span>
+        <span className="txt">Stargazers: </span>
         <Badge
           style={{ backgroundColor: '#52c41a' }}
           overflowCount={Number.POSITIVE_INFINITY}

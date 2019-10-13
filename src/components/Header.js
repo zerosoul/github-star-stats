@@ -10,11 +10,7 @@ const Wrapper = styled.header`
   align-items: center;
   max-width: 34rem;
   margin: 0 auto;
-  > h1 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-  }
+
   .ant-badge {
     width: 100%;
     position: sticky;
@@ -43,7 +39,6 @@ export default function Header({ url = '', loading, loadStars, getTotal, total }
   };
   return (
     <Wrapper>
-      <h1>⭐️ Awesome Star Statistics Tool ️️⭐️</h1>
       <Badge
         style={{ backgroundColor: '#87d068' }}
         count={repo ? total : 0}
@@ -58,7 +53,10 @@ export default function Header({ url = '', loading, loadStars, getTotal, total }
           onChange={handleChange}
           disabled={loading}
           onSearch={val => {
-            if (!val) return;
+            if (!val) {
+              message.warning('Please input a github repo URL');
+              return;
+            }
             console.log({ repo, val });
             if (!repo) {
               message.warning('URL invalid');

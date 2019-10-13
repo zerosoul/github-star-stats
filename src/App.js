@@ -5,6 +5,7 @@ import { getAvators, getQueryValue } from './utils';
 import Header from './components/Header';
 import Tabs from './containers/Tabs';
 import AvatorWall from './components/AvatorWall';
+import Footer from './components/Footer';
 message.config({
   duration: 2,
   maxCount: 1
@@ -62,6 +63,7 @@ const App = () => {
       />
       <Tabs activeTab={activeTab} data={data} repo={repo} />
       {finished && <AvatorWall total={data.total} avators={getAvators(data)} />}
+      <Footer />
     </>
   );
 };

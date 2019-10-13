@@ -41,6 +41,7 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-sparklines": "^1.7.0",
+    "react-twitter-embed": "^2.0.8",
     "recharts": "^1.7.1",
     "styled-components": "^4.4.0",
     "styled-reset": "^4.0.2"

@@ -5,12 +5,33 @@ import ChartBars from '../components/Recharts/Bars';
 import ChartLines from '../components/Recharts/Lines';
 import ChartArea from '../components/Recharts/Area';
 import Download from '../components/DownloadSVG';
-
+import Logo from '../assets/img/icon.png';
 import { getChartData, getPercent } from '../utils';
 
 const StyledTabs = styled(Tabs)`
   &.ant-tabs {
-    margin: 1rem 3rem;
+    margin: 1rem;
+    min-height: 70vh;
+    hgroup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 3rem 0;
+      img {
+        margin-bottom: 1rem;
+        width: 16rem;
+      }
+      .headerTip {
+        font-size: 1.2rem;
+        font-weight: 800;
+        /* text-transform: uppercase; */
+        margin-bottom: 0.2rem;
+      }
+      .subTip {
+        font-size: 0.8rem;
+        color: #aaa;
+      }
+    }
   }
   .tips {
     display: flex;
@@ -27,6 +48,13 @@ const ChartWrapper = styled.section`
   overflow-x: scroll;
 `;
 
+const Header = (
+  <hgroup>
+    <img src={Logo} alt="star logo" />
+    <h1 className="headerTip">⭐️Awesome Star Statistics Tool⭐️</h1>
+    <h2 className="subTip">visualize github repo daily stars</h2>
+  </hgroup>
+);
 export default function TabsContainer({ activeTab = 1, data, repo }) {
   const tabs = useRef(null);
   const [active, setActive] = useState(null);
@@ -78,10 +106,12 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
         }
         key="1"
       >
-        {data && (
+        {data ? (
           <ChartWrapper>
             <ChartBars data={getChartData(data)} />
           </ChartWrapper>
+        ) : (
+          Header
         )}
       </TabPane>
       <TabPane
@@ -93,10 +123,12 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
         }
         key="2"
       >
-        {data && (
+        {data ? (
           <ChartWrapper>
             <ChartLines data={getChartData(data)} />
           </ChartWrapper>
+        ) : (
+          Header
         )}
       </TabPane>
       <TabPane
@@ -108,10 +140,12 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
         }
         key="3"
       >
-        {data && (
+        {data ? (
           <ChartWrapper>
             <ChartArea data={getChartData(data)} />
           </ChartWrapper>
+        ) : (
+          Header
         )}
       </TabPane>
     </StyledTabs>
