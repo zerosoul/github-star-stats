@@ -1,5 +1,7 @@
 # Awesome Github star visualize tool
 
+[中文文档](./README.zh.md)
+
 No tool to visualize daily github star number online, so I make one! 🌈🌈🌈
 
 ![star data loaded](demo/loaded.png)
@@ -30,5 +32,11 @@ Visit: [http://stars.yangerxiao.com](http://stars.yangerxiao.com). Input the git
 - Thanks the great Open Source
 
 ## Support
+
+### Reward
+
+![reward code](./src/assets/img/reward.jpg)
+
+### Upvoted Producthunt
 
 <a href="https://www.producthunt.com/posts/github-star-statistics-tool?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-github-star-statistics-tool" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=171040&theme=dark" alt="Github Star Statistics Tool - Awesome github daily star statistics tool | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a>
