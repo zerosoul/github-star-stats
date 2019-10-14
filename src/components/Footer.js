@@ -19,6 +19,7 @@ const Wrapper = styled.footer`
   .social {
     font-size: 0.6rem;
     display: flex;
+    margin-bottom: 0.5rem;
     > a {
       display: flex;
       align-items: center;
@@ -51,6 +52,18 @@ export default function Footer() {
           @Zerosoul_Man
         </a>
       </div>
+
+      <a
+        className="producthunt"
+        href="https://www.producthunt.com/posts/github-star-statistics-tool?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-github-star-statistics-tool"
+        target="_blank"
+      >
+        <img
+          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=171040&theme=dark"
+          alt="Github Star Statistics Tool - Awesome github daily star statistics tool | Product Hunt Embed"
+          style={{ width: '250px', height: '54px' }}
+        />
+      </a>
     </Wrapper>
   );
 }

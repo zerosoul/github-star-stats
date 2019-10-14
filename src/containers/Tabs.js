@@ -19,7 +19,7 @@ const StyledTabs = styled(Tabs)`
       margin: 0;
       img {
         margin-bottom: 1rem;
-        width: 14rem;
+        width: 10rem;
       }
       .headerTip {
         font-size: 1.2rem;
