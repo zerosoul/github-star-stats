@@ -1,5 +1,5 @@
 const path = require('path');
-
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InterpolateHtmlPlugin = require('interpolate-html-plugin');
 const paths = require('./paths');
@@ -85,6 +85,9 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true
+          },
+          query: {
+            plugins: ['recharts']
           }
         }
       ]
@@ -108,6 +111,12 @@ module.exports = {
               minifyURLs: true
             }
     }),
+    // Moment.js is an extremely popular library that bundles large locale files
+    // by default due to how Webpack interprets its code. This is a practical
+    // solution that requires the user to opt into importing specific locales.
+    // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+    // You can remove this if you don't use Moment.js:
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new AutoDllPlugin(
       process.env.NODE_ENV === 'development'
         ? {}
@@ -118,7 +127,8 @@ module.exports = {
             filename: '[name]_[hash].dll.js',
             path: './dll',
             entry: {
-              react: ['react', 'react-dom', 'styled-components']
+              react: ['react', 'react-dom', 'styled-components'],
+              antdVendor: ['@ant-design/icons/lib/dist']
             }
           }
     ),

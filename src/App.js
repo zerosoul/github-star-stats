@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { message, Modal, notification } from 'antd';
 import styled from 'styled-components';
 import { useStars, useLimit } from './hooks';
 import { getAvators, getQueryValue } from './utils';
-import Header from './components/Header';
-import Tabs from './containers/Tabs';
-import AvatorWall from './components/AvatorWall';
-import Footer from './components/Footer';
+import Loading from './components/Loading';
+const Tabs = lazy(() => {
+  return import('./containers/Tabs');
+});
+const AvatorWall = lazy(() => {
+  return import('./components/AvatorWall');
+});
+const Header = lazy(() => {
+  return import('./components/Header');
+});
+const Footer = lazy(() => {
+  return import('./components/Footer');
+});
 message.config({
   duration: 2,
   maxCount: 1
@@ -98,7 +107,7 @@ const App = () => {
     }
   }, [finished]);
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <Header
         finished={finished}
         url={url}
@@ -110,7 +119,7 @@ const App = () => {
       <Tabs activeTab={activeTab} data={data} repo={repo} />
       {finished && <AvatorWall total={data.total} avators={getAvators(data)} />}
       <Footer />
-    </>
+    </Suspense>
   );
 };
 export default App;
