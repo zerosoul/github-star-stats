@@ -3,15 +3,21 @@
 目前(2019-10-11)互联网还找不到一个能可视化github仓库日增star数，为了满足自身需求和填补这块空白，我做了工具供大家使用。🌈🌈
 
 访问地址: [http://stars.yangerxiao.com](http://stars.yangerxiao.com)
-输入正确的仓库地址（比如：https://github.com/zerosoul/chinese-colors），剩下的就可以让这个工具来处理了
+输入正确的仓库地址（比如：https://github.com/zerosoul/chinese-colors），剩下的就可以让这个工具来处理了。
+
+## 界面
+
+![star data loaded](demo/loaded.png)
 
 ## 特性
 
 - 移动端友好 📱
 - 可以方便地选择时间区间 ✋
 - 提供多种类图表 📊
-- 可导出图片 🖼
 - 列出所有的关注标星者，并提供主页链接 👦
+- 可导出图片 🖼
+
+![star data result](demo/result.png)
 
 ## 感谢
 

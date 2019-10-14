@@ -2,6 +2,8 @@
 
 No tool to visualize daily github star number online, so I make one! 🌈🌈🌈
 
+![star data loaded](demo/loaded.png)
+
 Visit: [http://stars.yangerxiao.com](http://stars.yangerxiao.com). Input the github repo url, star data will be loaded automatically.
 
 ## Features
@@ -9,8 +11,10 @@ Visit: [http://stars.yangerxiao.com](http://stars.yangerxiao.com). Input the git
 - Mobile friendly 📱
 - Select time slot handily ✋
 - Different chart types 📊
-- Export the chart as PNG image 🖼
 - List all the stargazers 👦
+- Export the chart as PNG image 🖼
+
+![star data result](demo/result.png)
 
 ## Thanks
 
