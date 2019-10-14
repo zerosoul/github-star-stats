@@ -1,6 +1,7 @@
 import React from 'react';
+import Wrapper from './ChartWrapper';
+
 import {
-  ResponsiveContainer,
   AreaChart as Chart,
   Brush,
   Area,
@@ -22,7 +23,7 @@ import {
 
 export default function AreaChart({ data }) {
   return (
-    <ResponsiveContainer width="100%" height={500}>
+    <Wrapper>
       <Chart data={data}>
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis dataKey="date" />
@@ -32,6 +33,6 @@ export default function AreaChart({ data }) {
         <Area type="step" dataKey="star" stroke="#8884d8" fill="#8884d8" />
         {data.length > 20 && <Brush dataKey="date" height={30} stroke="#8884d8" />}
       </Chart>
-    </ResponsiveContainer>
+    </Wrapper>
   );
 }

@@ -46,8 +46,7 @@ export default function DownloadSVG({ title = 'wtf title', svg }) {
 
       ctx.font = `${fromSize}px verdana`;
       ctx.fillStyle = '#ccc';
-      ctx.fillText(`Generated from:`, 40, canvas.height - 60);
-      ctx.fillText(`works.yangerxiao.com/awesome-repo-star-view`, 40, canvas.height - 40);
+      ctx.fillText(`Generated from:https://stars.yangerxiao.com`, 40, canvas.height - 40);
       ctx.fillStyle = '#1890ff';
       ctx.fillText(`Twitter: @wsygc`, 40, canvas.height - 20, canvas.width - 40);
       let data = new XMLSerializer().serializeToString(svg);
@@ -75,7 +74,7 @@ export default function DownloadSVG({ title = 'wtf title', svg }) {
       type="primary"
       shape="circle"
       icon="download"
-      size={'big'}
+      size={'large'}
       onClick={handleClick}
     ></Button>
   );

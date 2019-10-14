@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { message } from 'antd';
+import { message, notification } from 'antd';
 import { useStars } from './hooks';
 import { getAvators, getQueryValue } from './utils';
 import Header from './components/Header';
@@ -53,7 +53,7 @@ const App = () => {
         message.error(errMsg, () => {
           setErrMsg(null);
         })}
-      {finished && message.success('Awesome data ready!')}
+      {finished && notification.success({ message: 'Awesome data ready!' })}
       <Header
         finished={finished}
         url={url}

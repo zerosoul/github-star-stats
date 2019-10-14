@@ -35,7 +35,6 @@ const StyledTabs = styled(Tabs)`
   }
   .tips {
     display: flex;
-    margin-top: 0.5rem;
     &.pc {
       justify-content: flex-end;
       padding: 0 1rem;
@@ -106,7 +105,7 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
         tab={
           <span>
             <Icon type="bar-chart" />
-            Bar Chart
+            Bar
           </span>
         }
         key="1"
@@ -123,7 +122,7 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
         tab={
           <span>
             <Icon type="line-chart" />
-            Line Chart
+            Line
           </span>
         }
         key="2"
@@ -140,7 +139,7 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
         tab={
           <span>
             <Icon type="area-chart" />
-            Area Chart
+            Area
           </span>
         }
         key="3"
