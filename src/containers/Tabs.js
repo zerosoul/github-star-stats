@@ -10,7 +10,9 @@ import { getChartData, getPercent } from '../utils';
 
 const StyledTabs = styled(Tabs)`
   &.ant-tabs {
-    margin: 0rem 2rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+    max-width: 44rem;
     min-height: 70vh;
     hgroup {
       display: flex;
