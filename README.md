@@ -2,11 +2,9 @@
 
 No tool to visualize daily github star number online, so I make one! 🌈🌈🌈
 
-Visit: [http://stars.yangerxiao.com](http://stars.yangerxiao.com)
+Visit: [http://stars.yangerxiao.com](http://stars.yangerxiao.com). Input the github repo url, star data will be loaded automatically.
 
 <iframe style="border: none;" src="https://cards.producthunt.com/cards/posts/171040?v=1" width="500" height="405" frameborder="0" scrolling="no" allowfullscreen></iframe>
-
-Input the github repo url, star data will be loaded automatically.
 
 ## Features
 
