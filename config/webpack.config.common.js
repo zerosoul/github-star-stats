@@ -85,9 +85,6 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true
-          },
-          query: {
-            plugins: ['recharts']
           }
         }
       ]
