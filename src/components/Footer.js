@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 import styled from 'styled-components';
-import { TwitterFollowButton } from 'react-twitter-embed';
-import { Divider } from 'antd';
+import { Divider, Icon } from 'antd';
 const Wrapper = styled.footer`
   display: flex;
   flex-direction: column;
@@ -17,7 +16,21 @@ const Wrapper = styled.footer`
       padding: 0 0.4rem;
     }
   }
+  .social {
+    font-size: 0.6rem;
+    display: flex;
+    > a {
+      display: flex;
+      align-items: center;
+      padding: 0 0.5rem;
+      .icon {
+        font-size: 1rem;
+        margin-right: 0.2rem;
+      }
+    }
+  }
 `;
+
 export default function Footer() {
   return (
     <Wrapper>
@@ -28,7 +41,16 @@ export default function Footer() {
           Tristan
         </a>
       </span>
-      <TwitterFollowButton screenName={'wsygc'} />
+      <div className="social">
+        <a href="//twitter.com/wsygc" target="_blank">
+          <Icon className="icon" type="twitter" />
+          @wsygc
+        </a>
+        <a href="//weibo.com/yanggc2014" target="_blank">
+          <Icon className="icon" type="weibo" />
+          @Zerosoul_Man
+        </a>
+      </div>
     </Wrapper>
   );
 }

@@ -1,5 +1,5 @@
 {
-  "name": "awesome-repo-star-view",
+  "name": "github-star-stats",
   "version": "1.0.0",
   "description": "Awesome github repo star tool",
   "main": "index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zerosoul/awesome-repo-star-view.git"
+    "url": "git+https://github.com/zerosoul/github-star-stats.git"
   },
   "keywords": [
     "github",
@@ -25,7 +25,7 @@
   "author": "tristan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zerosoul/awesome-repo-star-view/issues"
+    "url": "https://github.com/zerosoul/github-star-stats/issues"
   },
   "homepage": "https://stars.yangerxiao.com",
   "dependencies": {
@@ -40,8 +40,8 @@
     "graphql": "^14.5.8",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-github-fork-ribbon": "^0.6.0",
     "react-sparklines": "^1.7.0",
-    "react-twitter-embed": "^2.0.8",
     "recharts": "^1.7.1",
     "styled-components": "^4.4.0",
     "styled-reset": "^4.0.2"

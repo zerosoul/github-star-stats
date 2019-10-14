@@ -3,7 +3,7 @@ import { ResponsiveContainer } from 'recharts';
 
 export default function ChartWrapper({ children }) {
   return (
-    <ResponsiveContainer style={{ overflow: 'hidden' }} width="100%" height={500}>
+    <ResponsiveContainer width="100%" height={500} style={{ overflow: 'hidden' }}>
       {children}
     </ResponsiveContainer>
   );

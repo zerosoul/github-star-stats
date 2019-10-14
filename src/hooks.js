@@ -54,7 +54,11 @@ export function useStars() {
         const tmpObj = {};
         edges.forEach(({ node, starredAt }) => {
           let dateObj = new Date(starredAt);
-          let keyVal = `${dateObj.getFullYear()}/${dateObj.getMonth() + 1}/${dateObj.getDate()}`;
+          let keyVal = `${dateObj.toLocaleDateString(navigator.language, {
+            month: '2-digit',
+            day: '2-digit',
+            year: '2-digit'
+          })}`;
           // 考虑老数据可能有相同key
           tmpObj[keyVal] = tmpObj[keyVal]
             ? tmpObj[keyVal]

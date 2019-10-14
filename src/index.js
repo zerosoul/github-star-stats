@@ -5,6 +5,7 @@ import { HttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from '@apollo/react-hooks';
+import GithubFork from './components/GithubFork';
 
 // import { ConfigProvider } from 'antd';
 // 由于 antd 组件的默认文案是英文，所以需要修改为中文
@@ -37,6 +38,7 @@ import register from './registerServiceWorker';
 
 ReactDOM.render(
   <>
+    <GithubFork />
     <GlobalStyle />
     <ApolloProvider client={client}>
       <App />
