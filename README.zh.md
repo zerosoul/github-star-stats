@@ -1,29 +1,31 @@
-# 项目名
+# Github仓库日增Star统计工具
 
-[English Version](README.md)
+目前(2019-10-11)互联网还找不到一个能可视化github仓库日增star数，为了满足自身需求和填补这块空白，我做了工具供大家使用。🌈🌈
 
-[项目名](https://xxx.com/)
+访问地址: [http://stars.yangerxiao.com](http://stars.yangerxiao.com)
+输入正确的仓库地址（比如：https://github.com/zerosoul/chinese-colors），剩下的就可以让这个工具来处理了
 
 ## 特性
 
-### 功能
+- 移动端友好 📱
+- 可以方便地选择时间区间 ✋
+- 提供多种类图表 📊
+- 可导出图片 🖼
+- 列出所有的关注标星者，并提供主页链接 👦
 
-- [x] 已完成的
-- [ ] 未完成的
+## 感谢
 
-### 体验
+- [Github API v4](https://developer.github.com/v4/)
+- [apollo graphql](https://apollographql.com/docs/react/)
+- [create-react-app](https://github.com/facebook/create-react-app)
+- [react.js](https://reactjs.org)
+- [Recharts](http://recharts.org/)
+- [antd](https://ant.design)
+- [styled-components](https://styled-components.com): CSS-IN-JS Best Practice
+- eslint + prettier
+- husky + commitlint
+- 感谢伟大的开源世界
 
-- [x] 已具备的
+## 支持该项目
 
-## 技术栈
-
-- [create-react-app](https://github.com/facebook/create-react-app): 大家都在用的 react 项目构建架子
-- [react](https://reactjs.org): 最流行的前端 UI 构建语言
-- redux + react-redux: 最流行的 react 状态管理解决方案
-- [styled-components](https://styled-components.com): react 中 css 解决方案，CSS-IN-JS 最佳实践
-- eslint + prettier: 为了更好地编码
-- husky + commitlint: 为了更好地 GIT 提交
-
-## 更新日志
-
-[更新日志](CHANGELOG.md)
+<a href="https://www.producthunt.com/posts/github-star-statistics-tool?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-github-star-statistics-tool" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=171040&theme=dark" alt="Github Star Statistics Tool - Awesome github daily star statistics tool | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a>
