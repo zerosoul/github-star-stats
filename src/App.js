@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { message, notification } from 'antd';
-import { useStars } from './hooks';
+import { message, Modal, notification } from 'antd';
+import styled from 'styled-components';
+import { useStars, useLimit } from './hooks';
 import { getAvators, getQueryValue } from './utils';
 import Header from './components/Header';
 import Tabs from './containers/Tabs';
@@ -10,12 +11,26 @@ message.config({
   duration: 2,
   maxCount: 1
 });
+notification.config({
+  placement: 'bottomRight'
+});
+const ModalInfoWrapper = styled.div`
+  > p {
+    margin-bottom: 1.4rem;
+    > span {
+      color: red;
+      font-weight: 800;
+      padding: 0 0.2rem;
+    }
+  }
+`;
 const App = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [url, setUrl] = useState('');
   const [errMsg, setErrMsg] = useState('');
+  const { gameover, resetDate } = useLimit();
   const { repo, startLoadStars, getTotalCount, data, total, loading, finished, error } = useStars();
-  console.log({ data });
+
   useEffect(() => {
     if (error) {
       let tmpMsg = '';
@@ -47,13 +62,43 @@ const App = () => {
     console.log({ tabVal, urlVal });
   }, []);
 
+  useEffect(() => {
+    if (gameover) {
+      Modal.warning({
+        title: 'Game Over! ',
+        content: (
+          <ModalInfoWrapper>
+            <p>
+              Today API requests remaining is <span>ZERO</span>
+            </p>
+            <p>
+              Renew at <span>{resetDate}</span>!
+            </p>
+            <a href="https://developer.github.com/v4/guides/resource-limitations/">More Info</a>
+          </ModalInfoWrapper>
+        ),
+        okText: 'Got it'
+      });
+    }
+    return () => {
+      Modal.destroyAll();
+    };
+  }, [gameover, resetDate]);
+  // api error message
+  useEffect(() => {
+    if (errMsg) {
+      message.error(errMsg, () => {
+        setErrMsg(null);
+      });
+    }
+  }, [errMsg]);
+  useEffect(() => {
+    if (finished) {
+      notification.success({ message: 'Awesome data ready!' });
+    }
+  }, [finished]);
   return (
     <>
-      {errMsg &&
-        message.error(errMsg, () => {
-          setErrMsg(null);
-        })}
-      {finished && notification.success({ message: 'Awesome data ready!' })}
       <Header
         finished={finished}
         url={url}

@@ -132,5 +132,15 @@ export function useLimit() {
     }
   `;
   const { loading, error, data } = useQuery(LIMIT);
-  return { loading, error, data };
+  return {
+    loading,
+    error,
+    data,
+    gameover: data && data.rateLimit.remaining === 0,
+    resetDate:
+      data &&
+      `${new Date(data.rateLimit.resetAt).toLocaleDateString()} ${new Date(
+        data.rateLimit.resetAt
+      ).toLocaleTimeString()}`
+  };
 }
