@@ -87,7 +87,9 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
   useEffect(() => {
     if (data) {
       setTimeout(() => {
-        let svgEle = document.querySelector('.ant-tabs .ant-tabs-tabpane-active svg');
+        let svgEle = document.querySelector(
+          '.ant-tabs .ant-tabs-tabpane-active svg.recharts-surface'
+        );
         setSvgEle(svgEle);
       }, 10);
     }
