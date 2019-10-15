@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
-import { ResponsiveContainer } from 'recharts';
+import {
+  ResponsiveContainer,
+  ComposedChart,
+  Brush,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} from 'recharts';
 import styled from 'styled-components';
 import { Switch, Icon } from 'antd';
+
+import Tip from './Tooltip';
 
 const StyledOutWrapper = styled.section`
   position: relative;
@@ -28,7 +39,24 @@ const StyledOutWrapper = styled.section`
     }
   }
 `;
-export default function ChartWrapper({ opt = true, total, handleToggle, children }) {
+
+const CustomTooltip = ({ active, payload = [], label }) => {
+  if (active) {
+    console.log({ label, payload });
+    const [star = {}, total = {}] = payload;
+    return <Tip label={label} total={total.value} star={star.value} />;
+  }
+
+  return null;
+};
+export default function ChartWrapper({
+  common = true,
+  data = [],
+  opt = true,
+  total,
+  handleToggle,
+  children
+}) {
   const [setting, setSetting] = useState(false);
   const handleSetting = () => {
     setSetting(!setting);
@@ -57,7 +85,19 @@ export default function ChartWrapper({ opt = true, total, handleToggle, children
         </div>
       )}
       <ResponsiveContainer width="100%" height={500} style={{ overflow: 'hidden' }}>
-        {children}
+        {common ? (
+          <ComposedChart data={data}>
+            <CartesianGrid key="c" stroke="rgba(255,255,255,.8)" />
+            <XAxis key="cd" dataKey="date" />
+            <YAxis key="cdd" />
+            <Legend key="csss" />
+            <Tooltip key="csssf" content={<CustomTooltip />} />
+            {children}
+            {data.length > 20 && <Brush dataKey="date" height={30} stroke="#8884d8" />}
+          </ComposedChart>
+        ) : (
+          children
+        )}
       </ResponsiveContainer>
     </StyledOutWrapper>
   );

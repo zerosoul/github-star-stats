@@ -78,7 +78,7 @@ export default function PieChart({ data }) {
     setActiveIndex(index);
   };
   return (
-    <Wrapper opt={false}>
+    <Wrapper common={false} opt={false}>
       <StyledChart>
         <Pie
           activeIndex={activeIndex}

@@ -9,6 +9,9 @@ const Wrapper = styled.footer`
   padding: 1rem 3rem;
   font-size: 0.8rem;
   color: #ddd;
+  .producthunt {
+    margin-bottom: 0.5rem;
+  }
   .copyright {
     margin-bottom: 1rem;
     a {
@@ -36,22 +39,6 @@ export default function Footer() {
   return (
     <Wrapper>
       <Divider />
-      <span className="copyright">
-        Copyright © 2019 by
-        <a href="//yangerxiao.com" target="_blank">
-          Tristan
-        </a>
-      </span>
-      <div className="social">
-        <a href="//twitter.com/wsygc" target="_blank">
-          <Icon className="icon" type="twitter" />
-          @wsygc
-        </a>
-        <a href="//weibo.com/yanggc2014" target="_blank">
-          <Icon className="icon" type="weibo" />
-          @Zerosoul_Man
-        </a>
-      </div>
 
       <a
         className="producthunt"
@@ -64,6 +51,22 @@ export default function Footer() {
           style={{ width: '250px', height: '54px' }}
         />
       </a>
+      <div className="social">
+        <a href="//twitter.com/wsygc" target="_blank">
+          <Icon className="icon" type="twitter" />
+          @wsygc
+        </a>
+        <a href="//weibo.com/yanggc2014" target="_blank">
+          <Icon className="icon" type="weibo" />
+          @Zerosoul_Man
+        </a>
+      </div>
+      <div className="copyright">
+        Copyright © 2019 by
+        <a href="//yangerxiao.com" target="_blank">
+          Tristan
+        </a>
+      </div>
     </Wrapper>
   );
 }

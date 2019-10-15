@@ -93,7 +93,7 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
         setSvgEle(svgEle);
       }, 10);
     }
-  }, [data]);
+  }, [data, active]);
   const DownloadBtn = (
     <div className={`tips ${isMobile ? '' : 'pc'}`}>
       {!(percent == 0 || percent == 100) ? (
