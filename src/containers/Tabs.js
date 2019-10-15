@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Icon, Tabs, Progress } from 'antd';
 import ChartBars from '../components/Recharts/Bars';
 import ChartLines from '../components/Recharts/Lines';
 import ChartArea from '../components/Recharts/Area';
 import Download from '../components/DownloadSVG';
-import Logo from '../assets/img/icon.png';
+import Placeholder from '../components/ChartPlaceholder';
 import { getChartData, getPercent } from '../utils';
 
 const StyledTabs = styled(Tabs)`
@@ -14,26 +14,7 @@ const StyledTabs = styled(Tabs)`
     padding: 0 2rem;
     max-width: 44rem;
     min-height: 70vh;
-    hgroup {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0;
-      img {
-        margin-bottom: 1rem;
-        width: 10rem;
-      }
-      .headerTip {
-        font-size: 1.2rem;
-        font-weight: 800;
-        /* text-transform: uppercase; */
-        margin-bottom: 0.2rem;
-      }
-      .subTip {
-        font-size: 0.8rem;
-        color: #aaa;
-      }
-    }
+
     .recharts-responsive-container {
       overflow: hidden;
     }
@@ -55,13 +36,6 @@ const ChartWrapper = styled.section`
   height: 100%;
 `;
 
-const Header = (
-  <hgroup>
-    <img src={Logo} alt="star logo" />
-    <h1 className="headerTip">⭐️Awesome Star Statistics Tool⭐️</h1>
-    <h2 className="subTip">visualize github repo daily stars</h2>
-  </hgroup>
-);
 const getTabPanes = data => {
   const charts = [
     {
@@ -93,13 +67,12 @@ const getTabPanes = data => {
         }
         key={idx + 1}
       >
-        {data ? <ChartWrapper>{chart}</ChartWrapper> : Header}
+        {data ? <ChartWrapper>{chart}</ChartWrapper> : <Placeholder />}
       </TabPane>
     );
   });
 };
 export default function TabsContainer({ activeTab = 1, data, repo }) {
-  const tabs = useRef(null);
   const [active, setActive] = useState(null);
   const [svgEle, setSvgEle] = useState(null);
   const percent = getPercent(data);
@@ -130,11 +103,8 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
   );
   return (
     <StyledTabs
-      ref={tabs}
       onChange={tabKey => {
         setActive(tabKey);
-
-        console.log({ tabKey, tabs });
       }}
       activeKey={`${active || activeTab}`}
       tabBarExtraContent={DownloadBtn}
