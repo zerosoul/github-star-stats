@@ -1,9 +1,9 @@
-# Github 仓库日增 Star 统计工具
+# Github仓库Star统计工具
 
 目前(2019-10-11)互联网还找不到一个能可视化 github 仓库日增 star 数，为了满足自身需求和填补这块空白，我做了工具供大家使用。🌈🌈
 
 访问地址: [http://stars.yangerxiao.com](http://stars.yangerxiao.com)
-输入正确的仓库地址（比如：https://github.com/zerosoul/chinese-colors），剩下的就可以让这个工具来处理了。
+输入正确的仓库地址（比如：`https://github.com/zerosoul/chinese-colors`），剩下的就可以让这个工具来处理了。
 
 ## 界面
 
