@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Divider, Input, Badge, message } from 'antd';
+import { Divider, Affix, Input, Badge, message } from 'antd';
 import styled from 'styled-components';
 import { getRepo } from '../utils';
 const { Search } = Input;
@@ -39,37 +39,38 @@ export default function Header({ url = '', loading, finished, loadStars, getTota
   };
   return (
     <Wrapper>
-      <Badge
-        style={{ backgroundColor: '#87d068' }}
-        count={repo ? total : 0}
-        overflowCount={Number.POSITIVE_INFINITY}
-      >
-        <Search
-          allowClear
-          value={input}
-          addonBefore={'URL'}
-          placeholder="eg: https://github.com/zerosoul/PIW"
-          enterButton="Awesome"
-          onChange={handleChange}
-          disabled={loading}
-          onSearch={val => {
-            if (!val && finished) {
-              return;
-            }
-            if (!val) {
-              message.warning('Please input a github repo URL');
-              return;
-            }
-            console.log({ repo, val });
-            if (!repo) {
-              message.warning('URL invalid');
-              return;
-            }
-            loadStars(repo);
-          }}
-        />
-      </Badge>
-
+      <Affix offsetTop={20} style={{ width: '100%' }}>
+        <Badge
+          style={{ backgroundColor: '#87d068' }}
+          count={repo ? total : 0}
+          overflowCount={Number.POSITIVE_INFINITY}
+        >
+          <Search
+            allowClear
+            value={input}
+            addonBefore={'URL'}
+            placeholder="eg: https://github.com/zerosoul/PIW"
+            enterButton="Awesome"
+            onChange={handleChange}
+            disabled={loading}
+            onSearch={val => {
+              if (!val && finished) {
+                return;
+              }
+              if (!val) {
+                message.warning('Please input a github repo URL');
+                return;
+              }
+              console.log({ repo, val });
+              if (!repo) {
+                message.warning('URL invalid');
+                return;
+              }
+              loadStars(repo);
+            }}
+          />
+        </Badge>
+      </Affix>
       <Divider />
     </Wrapper>
   );

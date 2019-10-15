@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Icon, Tabs, Progress } from 'antd';
 import ChartBars from '../components/Recharts/Bars';
 import ChartLines from '../components/Recharts/Lines';
+import ChartPie from '../components/Recharts/Pie';
 import ChartArea from '../components/Recharts/Area';
 import Download from '../components/DownloadSVG';
 import Placeholder from '../components/ChartPlaceholder';
@@ -52,6 +53,11 @@ const getTabPanes = data => {
       title: 'Area',
       icon: 'area-chart',
       chart: <ChartArea data={getChartData(data)} />
+    },
+    {
+      title: 'Pie',
+      icon: 'pie-chart',
+      chart: <ChartPie data={getChartData(data)} />
     }
   ];
 

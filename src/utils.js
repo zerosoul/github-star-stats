@@ -93,6 +93,11 @@ export function getChartData(data) {
   chartData = Object.entries(chartData).map(([keyVal, { count }]) => {
     return { date: keyVal, star: count };
   });
+  // 获取每日累积总数
+  chartData.reduce((acc, curr, idx, arr) => {
+    arr[idx].currTotal = acc + curr.star;
+    return acc + curr.star;
+  }, 0);
   console.log({ chartData, data });
 
   return chartData;
