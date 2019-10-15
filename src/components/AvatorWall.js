@@ -36,7 +36,7 @@ export default function AvatorWall({ total, avators }) {
       target.parentElement.classList.remove('hover');
     }, 100);
   };
-  return (
+  return total ? (
     <Wrapper>
       <h2>
         <span className="txt">Stargazers: </span>
@@ -77,5 +77,5 @@ export default function AvatorWall({ total, avators }) {
         )}
       />
     </Wrapper>
-  );
+  ) : null;
 }

@@ -117,7 +117,7 @@ const App = () => {
         getTotal={getTotalCount}
       />
       <Tabs activeTab={activeTab} data={data} repo={repo} />
-      {finished && <AvatorWall total={data.total} avators={getAvators(data)} />}
+      <AvatorWall total={data && data.total} avators={getAvators(data)} />
       <Footer />
     </Suspense>
   );

@@ -34,6 +34,9 @@ const StyledTabs = styled(Tabs)`
         color: #aaa;
       }
     }
+    .recharts-responsive-container {
+      overflow: hidden;
+    }
   }
   .tips {
     display: flex;
@@ -49,8 +52,7 @@ const StyledTabs = styled(Tabs)`
 const { TabPane } = Tabs;
 const ChartWrapper = styled.section`
   width: 100%;
-  margin: 0 auto;
-  overflow-x: scroll;
+  height: 100%;
 `;
 
 const Header = (
@@ -60,6 +62,42 @@ const Header = (
     <h2 className="subTip">visualize github repo daily stars</h2>
   </hgroup>
 );
+const getTabPanes = data => {
+  const charts = [
+    {
+      title: 'Bar',
+      icon: 'bar-chart',
+      chart: <ChartBars data={getChartData(data)} />
+    },
+    {
+      title: 'Line',
+      icon: 'line-chart',
+      chart: <ChartLines data={getChartData(data)} />
+    },
+    {
+      title: 'Area',
+      icon: 'area-chart',
+      chart: <ChartArea data={getChartData(data)} />
+    }
+  ];
+
+  return charts.map((item, idx) => {
+    const { title, icon, chart } = item;
+    return (
+      <TabPane
+        tab={
+          <span>
+            <Icon type={icon} />
+            {title}
+          </span>
+        }
+        key={idx + 1}
+      >
+        {data ? <ChartWrapper>{chart}</ChartWrapper> : Header}
+      </TabPane>
+    );
+  });
+};
 export default function TabsContainer({ activeTab = 1, data, repo }) {
   const tabs = useRef(null);
   const [active, setActive] = useState(null);
@@ -68,14 +106,13 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
   console.log({ percent });
   const isMobile = window.innerWidth < 751 ? true : false;
   useEffect(() => {
-    console.log({ active });
     if (data) {
       setTimeout(() => {
         let svgEle = document.querySelector('.ant-tabs .ant-tabs-tabpane-active svg');
         setSvgEle(svgEle);
       }, 10);
     }
-  }, [active, data]);
+  }, [data]);
   const DownloadBtn = (
     <div className={`tips ${isMobile ? '' : 'pc'}`}>
       {!(percent == 0 || percent == 100) ? (
@@ -103,57 +140,7 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
       tabBarExtraContent={DownloadBtn}
       tabPosition={isMobile ? 'top' : 'left'}
     >
-      <TabPane
-        tab={
-          <span>
-            <Icon type="bar-chart" />
-            Bar
-          </span>
-        }
-        key="1"
-      >
-        {data ? (
-          <ChartWrapper>
-            <ChartBars data={getChartData(data)} />
-          </ChartWrapper>
-        ) : (
-          Header
-        )}
-      </TabPane>
-      <TabPane
-        tab={
-          <span>
-            <Icon type="line-chart" />
-            Line
-          </span>
-        }
-        key="2"
-      >
-        {data ? (
-          <ChartWrapper>
-            <ChartLines data={getChartData(data)} />
-          </ChartWrapper>
-        ) : (
-          Header
-        )}
-      </TabPane>
-      <TabPane
-        tab={
-          <span>
-            <Icon type="area-chart" />
-            Area
-          </span>
-        }
-        key="3"
-      >
-        {data ? (
-          <ChartWrapper>
-            <ChartArea data={getChartData(data)} />
-          </ChartWrapper>
-        ) : (
-          Header
-        )}
-      </TabPane>
+      {getTabPanes(data)}
     </StyledTabs>
   );
 }
