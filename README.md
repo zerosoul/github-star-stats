@@ -2,7 +2,7 @@
 
 [中文文档](./README.zh.md)
 
-No tool to visualize daily github star number online, so I make one! 🌈🌈🌈
+These is no tool to visualize daily github star number online, so I build one! 🌈🌈🌈
 
 ![star data loaded](demo/loaded.png)
 
