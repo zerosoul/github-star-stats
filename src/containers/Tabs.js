@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Icon, Tabs, Progress } from 'antd';
+import { Icon, Spin, Tabs, Progress } from 'antd';
 import ChartBars from '../components/Recharts/Bars';
 import ChartLines from '../components/Recharts/Lines';
 import ChartPie from '../components/Recharts/Pie';
@@ -78,7 +78,7 @@ const getTabPanes = data => {
     );
   });
 };
-export default function TabsContainer({ activeTab = 1, data, repo }) {
+export default function TabsContainer({ loading, activeTab = 1, data, repo }) {
   const [active, setActive] = useState(null);
   const [svgEle, setSvgEle] = useState(null);
   const percent = getPercent(data);
@@ -110,15 +110,17 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
     </div>
   );
   return (
-    <StyledTabs
-      onChange={tabKey => {
-        setActive(tabKey);
-      }}
-      activeKey={`${active || activeTab}`}
-      tabBarExtraContent={DownloadBtn}
-      tabPosition={isMobile ? 'top' : 'left'}
-    >
-      {getTabPanes(data)}
-    </StyledTabs>
+    <Spin spinning={loading && !data} size="large" tip={'Loading...'}>
+      <StyledTabs
+        onChange={tabKey => {
+          setActive(tabKey);
+        }}
+        activeKey={`${active || activeTab}`}
+        tabBarExtraContent={DownloadBtn}
+        tabPosition={isMobile ? 'top' : 'left'}
+      >
+        {getTabPanes(data)}
+      </StyledTabs>
+    </Spin>
   );
 }
