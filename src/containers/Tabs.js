@@ -86,12 +86,10 @@ export default function TabsContainer({ activeTab = 1, data, repo }) {
   const isMobile = window.innerWidth < 751 ? true : false;
   useEffect(() => {
     if (data) {
-      setTimeout(() => {
-        let svgEle = document.querySelector(
-          '.ant-tabs .ant-tabs-tabpane-active svg.recharts-surface'
-        );
-        setSvgEle(svgEle);
-      }, 10);
+      let svgEle = document.querySelector(
+        '.ant-tabs .ant-tabs-tabpane-active svg.recharts-surface'
+      );
+      setSvgEle(svgEle);
     }
   }, [data, active]);
   const DownloadBtn = (
