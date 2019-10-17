@@ -51,7 +51,7 @@ export default function ChartWrapper({
             {data.length > 20 && <Brush dataKey="date" height={30} stroke="#8884d8" />}
           </ComposedChart>
         ) : (
-          { children }
+          children
         )}
       </ResponsiveContainer>
     </StyledOutWrapper>
