@@ -17,23 +17,26 @@ const Wrapper = styled.header`
     top: 20;
   }
 `;
-export default function Header({ url = '', loading, finished, loadStars, getTotal, total }) {
+export default function Header({
+  gameover,
+  url = '',
+  loading,
+  finished,
+  loadStars,
+  getTotal,
+  total
+}) {
   const [repo, setRepo] = useState(null);
   const [input, setInput] = useState(url);
   useEffect(() => {
-    if (url) {
-      let tmpRepo = getRepo(url);
+    if (typeof gameover !== 'undefined' && !gameover) {
+      let tmpRepo = getRepo(input);
       setRepo(tmpRepo);
-      setInput(url);
+      if (tmpRepo) {
+        getTotal(tmpRepo);
+      }
     }
-  }, [url]);
-  useEffect(() => {
-    let tmpRepo = getRepo(input);
-    setRepo(tmpRepo);
-    if (tmpRepo) {
-      getTotal(tmpRepo);
-    }
-  }, [getTotal, input]);
+  }, [getTotal, input, gameover]);
   const handleChange = ({ target }) => {
     const { value } = target;
 
@@ -54,7 +57,7 @@ export default function Header({ url = '', loading, finished, loadStars, getTota
             placeholder="eg: https://github.com/zerosoul/PIW"
             enterButton="Awesome"
             onChange={handleChange}
-            disabled={loading}
+            disabled={loading || !!gameover}
             onSearch={val => {
               if (!val && finished) {
                 return;

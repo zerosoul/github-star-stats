@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Modal } from 'antd';
-import { useLimit } from '../hooks';
 import styled from 'styled-components';
 const ModalInfoWrapper = styled.div`
   > p {
@@ -12,8 +11,7 @@ const ModalInfoWrapper = styled.div`
     }
   }
 `;
-export default function GameoverModal() {
-  const { gameover, resetDate } = useLimit();
+export default function GameoverModal({ gameover = false, resetDate }) {
   useEffect(() => {
     if (gameover) {
       Modal.warning({
@@ -36,5 +34,6 @@ export default function GameoverModal() {
       Modal.destroyAll();
     };
   }, [gameover, resetDate]);
+
   return null;
 }

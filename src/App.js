@@ -1,7 +1,8 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { message, notification } from 'antd';
-import { useStarTotal, useStars } from './hooks';
+import { useStarTotal, useStars, useLimit } from './hooks';
 import { getAvators, getQueryValue } from './utils';
+
 import Loading from './components/Loading';
 import GameoverModal from './components/GameoverModal';
 const Tabs = lazy(() => {
@@ -29,6 +30,8 @@ const App = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [url, setUrl] = useState('');
   const [errMsg, setErrMsg] = useState('');
+  const { gameover, resetDate } = useLimit();
+
   const { total, getTotalCount } = useStarTotal();
   const { repo, startLoadStars, data, loading, finished, error } = useStars();
 
@@ -77,8 +80,9 @@ const App = () => {
   }, [finished]);
   return (
     <Suspense fallback={<Loading />}>
-      <GameoverModal />
+      <GameoverModal gameover={gameover} resetDate={resetDate} />
       <Header
+        gameover={gameover}
         finished={finished}
         url={url}
         total={total}
