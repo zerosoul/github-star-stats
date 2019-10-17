@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDailyToggle, useTotalToggle } from './hooks';
 
 import Wrapper from './ChartWrapper';
 import { Line, YAxis } from 'recharts';
 
 export default function Lines({ data }) {
-  const [totalLine, setTotalLine] = useState(true);
-
-  const handleToggle = checked => {
-    console.log('d');
-    setTotalLine(checked);
-  };
+  const { checked: dailyChecked, handleDailyToggle } = useDailyToggle();
+  const { checked: totalChecked, handleTotalToggle } = useTotalToggle();
 
   return (
-    <Wrapper data={data} handleToggle={handleToggle} total={totalLine}>
-      <Line dataKey="star" fill="#413ea0" />
+    <Wrapper
+      data={data}
+      handleDailyToggle={handleDailyToggle}
+      handleToggle={handleTotalToggle}
+      total={totalChecked}
+      daily={dailyChecked}
+    >
+      {dailyChecked && <Line dataKey="star" fill="#413ea0" />}
 
-      {totalLine && <YAxis yAxisId="right" orientation="right" />}
-      {totalLine && <Line yAxisId="right" type="monotone" dataKey="currTotal" stroke="#82ca9d" />}
+      {totalChecked && <YAxis yAxisId="right" orientation="right" />}
+      {totalChecked && (
+        <Line yAxisId="right" type="monotone" dataKey="currTotal" stroke="#82ca9d" />
+      )}
     </Wrapper>
   );
 }

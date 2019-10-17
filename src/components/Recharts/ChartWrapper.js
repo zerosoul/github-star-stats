@@ -21,7 +21,7 @@ const StyledOutWrapper = styled.section`
     right: 0;
     z-index: 999;
     padding: 0.4rem 0.6rem;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     &.setting {
       padding: 0;
       background: none;
@@ -54,7 +54,9 @@ export default function ChartWrapper({
   data = [],
   opt = true,
   total,
+  daily,
   handleToggle,
+  handleDailyToggle,
   children
 }) {
   const [setting, setSetting] = useState(false);
@@ -77,6 +79,10 @@ export default function ChartWrapper({
               <div className="opt">
                 <label>Total Stats</label>
                 <Switch size="small" checked={total} onChange={handleToggle} />
+              </div>
+              <div className="opt">
+                <label>Daily Stats</label>
+                <Switch size="small" checked={daily} onChange={handleDailyToggle} />
               </div>
             </>
           ) : (

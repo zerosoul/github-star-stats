@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDailyToggle, useTotalToggle } from './hooks';
 import Wrapper from './ChartWrapper';
 
 import { Area, YAxis } from 'recharts';
 
 export default function AreaChart({ data }) {
-  const [totalLine, setTotalLine] = useState(true);
-  const handleToggle = checked => {
-    console.log('d');
-    setTotalLine(checked);
-  };
+  const { checked: dailyChecked, handleDailyToggle } = useDailyToggle();
+  const { checked: totalChecked, handleTotalToggle } = useTotalToggle();
+
   return (
-    <Wrapper data={data} handleToggle={handleToggle} total={totalLine}>
-      {totalLine && <YAxis yAxisId="right" orientation="right" />}
-      {totalLine && (
+    <Wrapper
+      data={data}
+      handleDailyToggle={handleDailyToggle}
+      handleToggle={handleTotalToggle}
+      total={totalChecked}
+      daily={dailyChecked}
+    >
+      {totalChecked && <YAxis yAxisId="right" orientation="right" />}
+      {totalChecked && (
         <Area
           yAxisId="right"
           stackId="1"
@@ -22,7 +27,9 @@ export default function AreaChart({ data }) {
         />
       )}
 
-      <Area type="step" stackId="1" dataKey="star" stroke="#8884d8" fill="#8884d8" />
+      {dailyChecked && (
+        <Area type="step" stackId="1" dataKey="star" stroke="#8884d8" fill="#8884d8" />
+      )}
     </Wrapper>
   );
 }
