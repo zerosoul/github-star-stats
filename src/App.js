@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { message, Modal, notification } from 'antd';
 import styled from 'styled-components';
-import { useStars, useLimit } from './hooks';
+import { useStarTotal, useStars, useLimit } from './hooks';
 import { getAvators, getQueryValue } from './utils';
 import Loading from './components/Loading';
 const Tabs = lazy(() => {
@@ -39,7 +39,8 @@ const App = () => {
   const [url, setUrl] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const { gameover, resetDate } = useLimit();
-  const { repo, startLoadStars, getTotalCount, data, total, loading, finished, error } = useStars();
+  const { total, getTotalCount } = useStarTotal();
+  const { repo, startLoadStars, data, loading, finished, error } = useStars();
 
   useEffect(() => {
     if (error) {

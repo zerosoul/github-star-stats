@@ -57,12 +57,19 @@ module.exports = {
               }
             ]
           },
+          // graphql file
+          {
+            test: /\.(graphql|gql)$/,
+            exclude: /node_modules/,
+            loader: 'graphql-tag/loader'
+          },
           // file-loader将所有静态文件可被WebpackDevServer伺服
           // 生产环境，这些静态文件会被拷贝到build目录
           // 之所以不用 test ，是为了能够处理被上面的 loader 漏掉的文件
           {
             exclude: [
               /\.(js|jsx|mjs)$/,
+              /\.(graphql|gql)$/,
               /\.(css|less)$/,
               /\.(bmp|gif|jpe?g|png)$/,
               /\.less$/,

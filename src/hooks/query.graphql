@@ -1,0 +1,39 @@
+query GetStars($name: String!, $owner: String!, $after: String) {
+  repository(name: $name, owner: $owner) {
+    createdAt
+    stargazers(first: 100, after: $after) {
+      edges {
+        node {
+          id
+          login
+          name
+          avatarUrl
+        }
+        starredAt
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+      }
+      totalCount
+    }
+  }
+}
+
+query GetStarTotal($name: String!, $owner: String!) {
+  repository(name: $name, owner: $owner) {
+    stargazers {
+      totalCount
+    }
+  }
+}
+
+query getLimit {
+  rateLimit {
+    cost
+    limit
+    remaining
+    resetAt
+  }
+}

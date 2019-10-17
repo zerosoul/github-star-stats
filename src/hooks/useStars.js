@@ -1,48 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { GetStars } from './query.graphql';
 
-const STARS = gql`
-  query GetStars($name: String!, $owner: String!, $after: String) {
-    repository(name: $name, owner: $owner) {
-      createdAt
-      stargazers(first: 100, after: $after) {
-        edges {
-          node {
-            id
-            login
-            name
-            avatarUrl
-          }
-          starredAt
-        }
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        totalCount
-      }
-    }
-  }
-`;
-
-const STARS_TOTAL = gql`
-  query GetStarTotalCount($name: String!, $owner: String!) {
-    repository(name: $name, owner: $owner) {
-      stargazers {
-        totalCount
-      }
-    }
-  }
-`;
-export function useStars() {
+export default function useStars() {
   const [loading, setLoading] = useState(false);
   const [finished, setFinished] = useState(false);
   const [repo, setRepo] = useState(null);
   const [data, setData] = useState(undefined);
-  const [loadStars, { called, data: pageData, variables, error }] = useLazyQuery(STARS);
-  const [getTotal, { data: totalData }] = useLazyQuery(STARS_TOTAL);
+  const [loadStars, { called, data: pageData, variables, error }] = useLazyQuery(GetStars);
 
   useEffect(() => {
     if (pageData) {
@@ -57,7 +22,7 @@ export function useStars() {
           let keyVal = `${dateObj.toLocaleDateString(navigator.language, {
             month: '2-digit',
             day: '2-digit',
-            year: '2-digit'
+            year: 'numeric'
           })}`;
           // 考虑老数据可能有相同key
           tmpObj[keyVal] = tmpObj[keyVal]
@@ -102,49 +67,13 @@ export function useStars() {
       }
     });
   };
-  const getTotalCount = ({ owner, name }) => {
-    setData(undefined);
-    setFinished(false);
-    getTotal({
-      variables: {
-        owner,
-        name
-      }
-    });
-  };
+
   return {
-    getTotalCount,
     startLoadStars,
     repo,
     data,
-    total: (totalData && totalData.repository.stargazers.totalCount) || null,
     loading: loading && !error,
     finished,
     error
-  };
-}
-
-export function useLimit() {
-  const LIMIT = gql`
-    query {
-      rateLimit {
-        cost
-        limit
-        remaining
-        resetAt
-      }
-    }
-  `;
-  const { loading, error, data } = useQuery(LIMIT);
-  return {
-    loading,
-    error,
-    data,
-    gameover: data && data.rateLimit.remaining === 0,
-    resetDate:
-      data &&
-      `${new Date(data.rateLimit.resetAt).toLocaleDateString()} ${new Date(
-        data.rateLimit.resetAt
-      ).toLocaleTimeString()}`
   };
 }
