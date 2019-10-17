@@ -27,14 +27,16 @@ export default function Header({ url = '', loading, finished, loadStars, getTota
       setInput(url);
     }
   }, [url]);
-  const handleChange = ({ target }) => {
-    const { value } = target;
-    let tmpRepo = getRepo(value);
+  useEffect(() => {
+    let tmpRepo = getRepo(input);
     setRepo(tmpRepo);
     if (tmpRepo) {
       getTotal(tmpRepo);
     }
-    console.log({ tmpRepo });
+  }, [getTotal, input]);
+  const handleChange = ({ target }) => {
+    const { value } = target;
+
     setInput(value);
   };
   return (
