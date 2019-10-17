@@ -2,7 +2,7 @@ import React from 'react';
 import { useDailyToggle, useTotalToggle } from './hooks';
 import Wrapper from './ChartWrapper';
 
-import { Area, YAxis } from 'recharts';
+import { Area } from 'recharts';
 
 export default function AreaChart({ data }) {
   const { checked: dailyChecked, handleDailyToggle } = useDailyToggle();
@@ -16,11 +16,11 @@ export default function AreaChart({ data }) {
       total={totalChecked}
       daily={dailyChecked}
     >
-      {totalChecked && <YAxis yAxisId="right" orientation="right" />}
       {totalChecked && (
         <Area
           yAxisId="right"
           stackId="1"
+          name="Total"
           dataKey="currTotal"
           fill="rgba(2,2,2,.1)"
           stroke="rgba(2,2,2,.4)"
@@ -28,7 +28,7 @@ export default function AreaChart({ data }) {
       )}
 
       {dailyChecked && (
-        <Area type="step" stackId="1" dataKey="star" stroke="#8884d8" fill="#8884d8" />
+        <Area name="Star" legendType="star" type="step" stackId="1" dataKey="star" stroke="#8884d8" fill="#8884d8" />
       )}
     </Wrapper>
   );

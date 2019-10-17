@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDailyToggle, useTotalToggle } from './hooks';
-import { Bar, Line, YAxis } from 'recharts';
+import { Bar, Line } from 'recharts';
 
 import Wrapper from './ChartWrapper';
 
@@ -15,12 +15,11 @@ export default function Bars({ data }) {
       total={totalChecked}
       daily={dailyChecked}
     >
-      {totalChecked && <YAxis yAxisId="right" orientation="right" />}
       {totalChecked && (
-        <Line yAxisId="right" type="monotone" dataKey="currTotal" stroke="#82ca9d" />
+        <Line yAxisId="right" name="Total" type="monotone" dataKey="currTotal" stroke="#82ca9d" />
       )}
 
-      {dailyChecked && <Bar dataKey="star" fill="#413ea0" />}
+      {dailyChecked && <Bar name="Star" legendType="star" dataKey="star" fill="#413ea0" />}
     </Wrapper>
   );
 }

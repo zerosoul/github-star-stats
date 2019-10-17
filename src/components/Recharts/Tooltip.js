@@ -5,9 +5,10 @@ import { Statistic, Icon } from 'antd';
 const Wrapper = styled.div`
   background: rgba(255, 255, 255, 0.6);
   padding: 0.2rem 0.4rem;
+  border: 1px solid rgba(2, 2, 2, 0.3);
 `;
 
-export default function Tooltip({ label = 'label', star = null, total = null }) {
+function Tooltip({ label = 'label', star = null, total = null }) {
   return (
     <Wrapper>
       <Statistic
@@ -32,3 +33,15 @@ export default function Tooltip({ label = 'label', star = null, total = null }) 
     </Wrapper>
   );
 }
+
+const CustomTooltip = ({ active, payload = [], label }) => {
+  if (active && payload) {
+    console.log({ label, payload });
+    const [star = {}, total = {}] = payload;
+    return <Tooltip label={label} total={total.value} star={star.value} />;
+  }
+
+  return null;
+};
+
+export default CustomTooltip;

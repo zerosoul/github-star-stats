@@ -2,7 +2,7 @@ import React from 'react';
 import { useDailyToggle, useTotalToggle } from './hooks';
 
 import Wrapper from './ChartWrapper';
-import { Line, YAxis } from 'recharts';
+import { Line } from 'recharts';
 
 export default function Lines({ data }) {
   const { checked: dailyChecked, handleDailyToggle } = useDailyToggle();
@@ -16,11 +16,10 @@ export default function Lines({ data }) {
       total={totalChecked}
       daily={dailyChecked}
     >
-      {dailyChecked && <Line dataKey="star" fill="#413ea0" />}
+      {dailyChecked && <Line name="Star" dataKey="star" fill="#413ea0" />}
 
-      {totalChecked && <YAxis yAxisId="right" orientation="right" />}
       {totalChecked && (
-        <Line yAxisId="right" type="monotone" dataKey="currTotal" stroke="#82ca9d" />
+        <Line name="Total" legendType="star" yAxisId="right" type="monotone" dataKey="currTotal" stroke="#82ca9d" />
       )}
     </Wrapper>
   );
