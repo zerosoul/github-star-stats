@@ -1,9 +1,9 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
-import { message, Modal, notification } from 'antd';
-import styled from 'styled-components';
-import { useStarTotal, useStars, useLimit } from './hooks';
+import { message, notification } from 'antd';
+import { useStarTotal, useStars } from './hooks';
 import { getAvators, getQueryValue } from './utils';
 import Loading from './components/Loading';
+import GameoverModal from './components/GameoverModal';
 const Tabs = lazy(() => {
   return import('./containers/Tabs');
 });
@@ -24,21 +24,11 @@ message.config({
 notification.config({
   placement: 'bottomRight'
 });
-const ModalInfoWrapper = styled.div`
-  > p {
-    margin-bottom: 1.4rem;
-    > span {
-      color: red;
-      font-weight: 800;
-      padding: 0 0.2rem;
-    }
-  }
-`;
+
 const App = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [url, setUrl] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const { gameover, resetDate } = useLimit();
   const { total, getTotalCount } = useStarTotal();
   const { repo, startLoadStars, data, loading, finished, error } = useStars();
 
@@ -70,31 +60,8 @@ const App = () => {
     if (urlVal) {
       setUrl(urlVal);
     }
-    console.log({ tabVal, urlVal });
   }, []);
 
-  useEffect(() => {
-    if (gameover) {
-      Modal.warning({
-        title: 'Game Over! ',
-        content: (
-          <ModalInfoWrapper>
-            <p>
-              Today API requests remaining is <span>ZERO</span>
-            </p>
-            <p>
-              Renew at <span>{resetDate}</span>!
-            </p>
-            <a href="https://developer.github.com/v4/guides/resource-limitations/">More Info</a>
-          </ModalInfoWrapper>
-        ),
-        okText: 'Got it'
-      });
-    }
-    return () => {
-      Modal.destroyAll();
-    };
-  }, [gameover, resetDate]);
   // api error message
   useEffect(() => {
     if (errMsg) {
@@ -110,6 +77,7 @@ const App = () => {
   }, [finished]);
   return (
     <Suspense fallback={<Loading />}>
+      <GameoverModal />
       <Header
         finished={finished}
         url={url}
