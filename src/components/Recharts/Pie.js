@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { PieChart as Chart, Pie, Sector } from 'recharts';
 
 const StyledChart = styled(Chart)`
-  margin-left: 4rem;
+  padding: 0 3rem;
   svg {
     overflow: visible;
   }

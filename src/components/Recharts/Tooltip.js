@@ -36,7 +36,6 @@ function Tooltip({ label = 'label', star = null, total = null }) {
 
 const CustomTooltip = ({ active, payload = [], label }) => {
   if (active && payload) {
-    console.log({ label, payload });
     const [star = {}, total = {}] = payload;
     return <Tooltip label={label} total={total.value} star={star.value} />;
   }

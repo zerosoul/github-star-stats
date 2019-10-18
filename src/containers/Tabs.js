@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Icon, Spin, Tabs, Progress } from 'antd';
 import ChartBars from '../components/Recharts/Bars';
@@ -78,20 +78,13 @@ const getTabPanes = data => {
     );
   });
 };
+const svgQuery = '.ant-tabs .ant-tabs-tabpane-active svg.recharts-surface';
 export default function TabsContainer({ loading, activeTab = 1, data, repo }) {
   const [active, setActive] = useState(null);
-  const [svgEle, setSvgEle] = useState(null);
   const percent = getPercent(data);
   console.log({ percent });
   const isMobile = window.innerWidth < 751 ? true : false;
-  useEffect(() => {
-    if (data) {
-      let svgEle = document.querySelector(
-        '.ant-tabs .ant-tabs-tabpane-active svg.recharts-surface'
-      );
-      setSvgEle(svgEle);
-    }
-  }, [data, active]);
+
   const DownloadBtn = (
     <div className={`tips ${isMobile ? '' : 'pc'}`}>
       {!(percent == 0 || percent == 100) ? (
@@ -104,7 +97,7 @@ export default function TabsContainer({ loading, activeTab = 1, data, repo }) {
         />
       ) : null}
       <div className="divide"></div>
-      {percent == 100 ? <Download title={`${repo.owner}/${repo.name}`} svg={svgEle} /> : null}
+      {percent == 100 ? <Download title={`${repo.owner}/${repo.name}`} svg={svgQuery} /> : null}
     </div>
   );
   return (
