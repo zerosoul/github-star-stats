@@ -38,13 +38,15 @@ export default function LimitTip({ leftCount = 0, resetDate }) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const tmp = setTimeout(() => {
-      setVisible(false);
-    }, 4000);
-    return () => {
-      clearTimeout(tmp);
-    };
-  }, [visible]);
+    if (leftCount) {
+      const tmp = setTimeout(() => {
+        setVisible(false);
+      }, 4000);
+      return () => {
+        clearTimeout(tmp);
+      };
+    }
+  }, [visible, leftCount]);
   return leftCount ? (
     <StyledWrapper className={visible ? '' : 'hide'}>
       <div className="tip">
