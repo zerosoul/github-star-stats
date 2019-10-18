@@ -48,7 +48,9 @@ export default function ChartWrapper({
             <Legend />
             <Tooltip content={<CustomTooltip />} />
             {children}
-            {data.length > 20 && <Brush dataKey="date" height={30} stroke="#8884d8" />}
+            {data.length > 20 && (daily || total) && (
+              <Brush dataKey="date" height={30} stroke="#8884d8" />
+            )}
           </ComposedChart>
         ) : (
           children
