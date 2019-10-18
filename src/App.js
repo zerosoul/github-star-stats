@@ -8,6 +8,9 @@ import GameoverModal from './components/GameoverModal';
 const Tabs = lazy(() => {
   return import('./containers/Tabs');
 });
+const LimitTip = lazy(() => {
+  return import('./components/LimitTip');
+});
 const AvatorWall = lazy(() => {
   return import('./components/AvatorWall');
 });
@@ -30,7 +33,7 @@ const App = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [url, setUrl] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const { gameover, resetDate } = useLimit();
+  const { gameover, remaining, resetDate } = useLimit();
 
   const { total, getTotalCount } = useStarTotal();
   const { repo, startLoadStars, data, loading, finished, error } = useStars();
@@ -80,6 +83,7 @@ const App = () => {
   }, [finished]);
   return (
     <Suspense fallback={<Loading />}>
+      <LimitTip resetDate={resetDate} leftCount={remaining} />
       <GameoverModal gameover={gameover} resetDate={resetDate} />
       <Header
         gameover={gameover}

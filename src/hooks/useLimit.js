@@ -7,7 +7,7 @@ export default function useLimit() {
   return {
     loading,
     error,
-    data,
+    remaining: data ? data.rateLimit.remaining : 0,
     gameover: data ? data.rateLimit.remaining === 0 : undefined,
     resetDate:
       data &&
