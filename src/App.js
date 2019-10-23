@@ -31,7 +31,6 @@ notification.config({
 
 const App = () => {
   const [activeTab, setActiveTab] = useState(1);
-  const [url, setUrl] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const { gameover, remaining, resetDate } = useLimit();
 
@@ -59,12 +58,8 @@ const App = () => {
   }, [error]);
   useEffect(() => {
     let tabVal = getQueryValue('tab');
-    let urlVal = getQueryValue('repo');
     if (tabVal) {
       setActiveTab(tabVal);
-    }
-    if (urlVal) {
-      setUrl(urlVal);
     }
   }, []);
 
@@ -88,7 +83,6 @@ const App = () => {
       <Header
         gameover={gameover}
         finished={finished}
-        url={url}
         total={total}
         loading={loading}
         loadStars={startLoadStars}

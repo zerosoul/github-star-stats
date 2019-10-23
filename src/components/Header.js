@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, Affix, Input, Badge, message } from 'antd';
 import styled from 'styled-components';
-import { getRepo } from '../utils';
+import { getRepo, getQueryValue } from '../utils';
 const { Search } = Input;
 const Wrapper = styled.header`
   padding: 1rem 2rem;
@@ -17,6 +17,7 @@ const Wrapper = styled.header`
     top: 20;
   }
 `;
+const LOCAL_REPO_URL = getQueryValue('repo') || localStorage.getItem('LOCAL_REPO_URL') || '';
 export default function Header({
   gameover,
   url = '',
@@ -26,7 +27,7 @@ export default function Header({
   getTotal,
   total
 }) {
-  const [repo, setRepo] = useState(null);
+  const [repo, setRepo] = useState(LOCAL_REPO_URL);
   const [input, setInput] = useState(url);
   useEffect(() => {
     if (typeof gameover !== 'undefined' && !gameover) {

@@ -23,6 +23,7 @@ query GetStars($name: String!, $owner: String!, $after: String) {
 
 query GetStarTotal($name: String!, $owner: String!) {
   repository(name: $name, owner: $owner) {
+    url
     stargazers {
       totalCount
     }
