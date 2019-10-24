@@ -18,26 +18,18 @@ const Wrapper = styled.header`
   }
 `;
 const LOCAL_REPO_URL = getQueryValue('repo') || localStorage.getItem('LOCAL_REPO_URL') || '';
-export default function Header({
-  gameover,
-  url = '',
-  loading,
-  finished,
-  loadStars,
-  getTotal,
-  total
-}) {
-  const [repo, setRepo] = useState(LOCAL_REPO_URL);
-  const [input, setInput] = useState(url);
+export default function Header({ gameover, loading, finished, loadStars, getTotal, total }) {
+  const [repo, setRepo] = useState(null);
+  const [input, setInput] = useState(LOCAL_REPO_URL);
   useEffect(() => {
-    if (typeof gameover !== 'undefined' && !gameover) {
+    if (total == null || (typeof gameover !== 'undefined' && !gameover)) {
       let tmpRepo = getRepo(input);
       setRepo(tmpRepo);
       if (tmpRepo) {
         getTotal(tmpRepo);
       }
     }
-  }, [getTotal, input, gameover]);
+  }, [getTotal, input, gameover, total]);
   const handleChange = ({ target }) => {
     const { value } = target;
 
