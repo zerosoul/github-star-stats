@@ -12,7 +12,8 @@ const Wrapper = styled.footer`
   .producthunt {
     margin-bottom: 0.5rem;
   }
-  .copyright {
+  .copyright,
+  .icp {
     margin-bottom: 1rem;
     a {
       color: #666;
@@ -65,6 +66,11 @@ export default function Footer() {
         Copyright © 2019 by
         <a href="//yangerxiao.com" target="_blank">
           Tristan
+        </a>
+      </div>
+      <div className="icp">
+        <a rel="noopener noreferrer" target="_blank" href="http://www.beian.miit.gov.cn/">
+          京ICP备16015459号-1
         </a>
       </div>
     </Wrapper>
