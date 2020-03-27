@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Icon as LegacyIcon } from '@ant-design/compatible';
+import {
+  BarChartOutlined,
+  LineChartOutlined,
+  PieChartOutlined,
+  AreaChartOutlined
+} from '@ant-design/icons';
 import { Spin, Tabs, Progress } from 'antd';
 import ChartBars from '../components/Recharts/Bars';
 import ChartLines from '../components/Recharts/Lines';
@@ -38,26 +43,26 @@ const ChartWrapper = styled.section`
   height: 100%;
 `;
 
-const getTabPanes = data => {
+const getTabPanes = (data) => {
   const charts = [
     {
       title: 'Bar',
-      icon: 'bar-chart',
+      icon: <BarChartOutlined />,
       chart: <ChartBars data={getChartData(data)} />
     },
     {
       title: 'Line',
-      icon: 'line-chart',
+      icon: <LineChartOutlined />,
       chart: <ChartLines data={getChartData(data)} />
     },
     {
       title: 'Area',
-      icon: 'area-chart',
+      icon: <AreaChartOutlined />,
       chart: <ChartArea data={getChartData(data)} />
     },
     {
       title: 'Pie',
-      icon: 'pie-chart',
+      icon: <PieChartOutlined />,
       chart: <ChartPie data={getChartData(data)} />
     }
   ];
@@ -68,7 +73,7 @@ const getTabPanes = data => {
       <TabPane
         tab={
           <span>
-            <LegacyIcon type={icon} />
+            {icon}
             {title}
           </span>
         }
@@ -104,7 +109,7 @@ export default function TabsContainer({ loading, activeTab = 1, data, repo }) {
   return (
     <Spin spinning={loading && !data} size="large" tip={'Loading...'}>
       <StyledTabs
-        onChange={tabKey => {
+        onChange={(tabKey) => {
           setActive(tabKey);
         }}
         activeKey={`${active || activeTab}`}
