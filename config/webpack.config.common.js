@@ -122,8 +122,7 @@ module.exports = {
             filename: '[name]_[hash].dll.js',
             path: './dll',
             entry: {
-              react: ['react', 'react-dom', 'styled-components'],
-              antdVendor: ['@ant-design/icons/lib/dist']
+              react: ['react', 'react-dom', 'styled-components']
             }
           }
     )
