@@ -1,9 +1,6 @@
-const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const paths = require('./paths');
 const HappyPack = require('happypack');
-const AutoDllPlugin = require('autodll-webpack-plugin');
 
 module.exports = {
   resolve: {
@@ -105,27 +102,7 @@ module.exports = {
               minifyCSS: true,
               minifyURLs: true
             }
-    }),
-    // Moment.js is an extremely popular library that bundles large locale files
-    // by default due to how Webpack interprets its code. This is a practical
-    // solution that requires the user to opt into importing specific locales.
-    // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
-    // You can remove this if you don't use Moment.js:
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new AutoDllPlugin(
-      process.env.NODE_ENV === 'development'
-        ? {}
-        : {
-            context: path.join(__dirname, '..'),
-            inject: true, //自动在index.html引入dll
-            debug: true,
-            filename: '[name]_[hash].dll.js',
-            path: './dll',
-            entry: {
-              react: ['react', 'react-dom', 'styled-components']
-            }
-          }
-    )
+    })
   ],
   // node中用到，但是浏览器不用到的类库，给出空对象模拟
   node: {
