@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Switch, Icon } from 'antd';
+import { SettingOutlined } from '@ant-design/icons';
+import { Switch } from 'antd';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.aside`
@@ -50,7 +51,7 @@ export default function Setting({ daily, total, toggleTotal, toggleDaily }) {
           </div>
         </>
       ) : (
-        <Icon onClick={handleSetting} type="setting" />
+        <SettingOutlined onClick={handleSetting} />
       )}
     </StyledWrapper>
   );

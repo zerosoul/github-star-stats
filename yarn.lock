@@ -14,7 +14,7 @@
   resolved "https://registry.npm.taobao.org/@ant-design/icons-svg/download/@ant-design/icons-svg-4.0.0.tgz?cache=0&sync_timestamp=1582859447353&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40ant-design%2Ficons-svg%2Fdownload%2F%40ant-design%2Ficons-svg-4.0.0.tgz#6683db0df97c0c6900bb28a280faf391522ec734"
   integrity sha1-ZoPbDfl8DGkAuyiigPrzkVIuxzQ=
 
-"@ant-design/icons@^4.0.0":
+"@ant-design/icons@^4.0.0", "@ant-design/icons@^4.0.3":
   version "4.0.3"
   resolved "https://registry.npm.taobao.org/@ant-design/icons/download/@ant-design/icons-4.0.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40ant-design%2Ficons%2Fdownload%2F%40ant-design%2Ficons-4.0.3.tgz#ba2fd8160cb1a51ba31979319355a47c5d7b5376"
   integrity sha1-ui/YFgyxpRujGXkxk1WkfF17U3Y=

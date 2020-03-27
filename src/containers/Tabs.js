@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Icon, Spin, Tabs, Progress } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Spin, Tabs, Progress } from 'antd';
 import ChartBars from '../components/Recharts/Bars';
 import ChartLines from '../components/Recharts/Lines';
 import ChartPie from '../components/Recharts/Pie';
@@ -67,7 +68,7 @@ const getTabPanes = data => {
       <TabPane
         tab={
           <span>
-            <Icon type={icon} />
+            <LegacyIcon type={icon} />
             {title}
           </span>
         }

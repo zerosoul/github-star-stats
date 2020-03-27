@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 import styled from 'styled-components';
-import { Divider, Icon } from 'antd';
+import { TwitterOutlined, WeiboOutlined } from '@ant-design/icons';
+import { Divider } from 'antd';
 const Wrapper = styled.footer`
   display: flex;
   flex-direction: column;
@@ -54,11 +55,11 @@ export default function Footer() {
       </a>
       <div className="social">
         <a href="//twitter.com/wsygc" target="_blank">
-          <Icon className="icon" type="twitter" />
+          <TwitterOutlined className="icon" />
           @wsygc
         </a>
         <a href="//weibo.com/yanggc2014" target="_blank">
-          <Icon className="icon" type="weibo" />
+          <WeiboOutlined className="icon" />
           @Zerosoul_Man
         </a>
       </div>

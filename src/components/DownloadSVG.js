@@ -1,4 +1,5 @@
 import React from 'react';
+import { DownloadOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
 function triggerDownload(imgURI, imgName = 'awesome') {
@@ -77,7 +78,7 @@ export default function DownloadSVG({ title = 'wtf title', svg = null }) {
     <Button
       type="primary"
       shape="circle"
-      icon="download"
+      icon={<DownloadOutlined />}
       size={'large'}
       onClick={handleClick}
     ></Button>
