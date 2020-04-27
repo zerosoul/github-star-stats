@@ -20,7 +20,7 @@
       "import",
       {
         "libraryName": "antd",
-        "style": true // or 'css'
+        "style": "css" // or 'css'
       }
     ]
   ]

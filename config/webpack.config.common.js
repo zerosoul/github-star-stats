@@ -5,7 +5,7 @@ const HappyPack = require('happypack');
 module.exports = {
   resolve: {
     // webpack 能识别的文件扩展名
-    extensions: ['.js', '.jsx', '.json', '.less', '.css']
+    extensions: ['.js', '.jsx', '.json', '.css']
     // 针对 npm 中的第三方模块优先采用 jsnext:main 中指向的 ES6 模块化语法的文件
     // mainFields: ["jsnext:main", "browser", "main"]
   },
@@ -28,23 +28,6 @@ module.exports = {
             exclude: /node_modules/,
             use: 'happypack/loader'
           },
-          {
-            test: /\.less$/,
-            use: [
-              {
-                loader: 'style-loader' // creates style nodes from JS strings
-              },
-              {
-                loader: 'css-loader' // translates CSS into CommonJS
-              },
-              {
-                loader: 'less-loader',
-                options: {
-                  javascriptEnabled: true
-                } // compiles Less to CSS
-              }
-            ]
-          },
           // graphql file
           {
             test: /\.(graphql|gql)$/,
@@ -60,7 +43,6 @@ module.exports = {
               /\.(graphql|gql)$/,
               /\.(css|less)$/,
               /\.(bmp|gif|jpe?g|png)$/,
-              /\.less$/,
               /\.html$/,
               /\.json$/
             ],
