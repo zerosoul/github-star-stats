@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import { GetStars } from './query.graphql';
 
 export default function useStars() {

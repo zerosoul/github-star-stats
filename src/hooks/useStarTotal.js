@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import { GetStarTotal } from './query.graphql';
 
 export default function useStarTotal() {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Modal } from 'antd';
 import styled from 'styled-components';
 const ModalInfoWrapper = styled.div`

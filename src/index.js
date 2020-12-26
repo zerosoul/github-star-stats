@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
-import { setContext } from 'apollo-link-context';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloProvider } from '@apollo/react-hooks';
 import GithubFork from './components/GithubFork';
 
+import { ApolloClient } from '@apollo/client/core';
+import { setContext } from '@apollo/client/link/context';
+import { InMemoryCache } from '@apollo/client/cache';
+import { ApolloProvider, HttpLink } from '@apollo/client';
 // import { ConfigProvider } from 'antd';
 // 由于 antd 组件的默认文案是英文，所以需要修改为中文
 // import zhCN from 'antd/es/locale/zh_CN';

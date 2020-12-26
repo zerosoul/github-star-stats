@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Divider, Affix, Input, Badge, message } from 'antd';
 import styled from 'styled-components';
 import { getRepo, getQueryValue } from '../utils';
@@ -51,7 +51,7 @@ export default function Header({ gameover, loading, finished, loadStars, getTota
             enterButton="Awesome"
             onChange={handleChange}
             disabled={loading || !!gameover}
-            onSearch={val => {
+            onSearch={(val) => {
               if (!val && finished) {
                 return;
               }

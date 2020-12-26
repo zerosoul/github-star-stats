@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Wrapper from './ChartWrapper';
 import styled from 'styled-components';
 import { PieChart as Chart, Pie, Sector } from 'recharts';
@@ -10,7 +10,7 @@ const StyledChart = styled(Chart)`
   }
 `;
 
-const renderActiveShape = props => {
+const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
     cx,

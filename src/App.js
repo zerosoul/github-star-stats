@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import { message, notification } from 'antd';
 import { useStarTotal, useStars, useLimit } from './hooks';
 import { getAvators, getQueryValue } from './utils';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { SettingOutlined } from '@ant-design/icons';
 import { Switch } from 'antd';
 import styled from 'styled-components';
