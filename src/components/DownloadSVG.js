@@ -16,13 +16,44 @@ function triggerDownload(imgURI, imgName = 'awesome') {
 
   a.dispatchEvent(evt);
 }
-
-export default function DownloadSVG({ title = 'wtf title', svg = null }) {
-  console.log({ svg, title });
-
+function saveSource(data, filename) {
+  if (!data) {
+    return;
+  }
+  if (!filename) filename = 'awesome.json';
+  if (typeof data === 'object') {
+    data = JSON.stringify(data, undefined, 4);
+  }
+  var blob = new Blob([data], { type: 'text/json' });
+  var e = document.createEvent('MouseEvents');
+  var a = document.createElement('a');
+  a.download = filename;
+  a.href = window.URL.createObjectURL(blob);
+  a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
+  e.initMouseEvent(
+    'click',
+    true,
+    false,
+    window,
+    0,
+    0,
+    0,
+    0,
+    0,
+    false,
+    false,
+    false,
+    false,
+    0,
+    null
+  );
+  a.dispatchEvent(e);
+}
+export default function DownloadSVG({ title = 'wtf title', svg = null, sourceData = [] }) {
   const handleClick = () => {
     const scaleRatio = 1;
     console.log({ svg });
+    saveSource(sourceData);
     // 传入的是查询字符串
     if (typeof svg === 'string') {
       svg = document.querySelector(svg);
@@ -61,7 +92,7 @@ export default function DownloadSVG({ title = 'wtf title', svg = null }) {
       let svgBlob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
       let url = DOMURL.createObjectURL(svgBlob);
 
-      img.onload = function() {
+      img.onload = function () {
         ctx.drawImage(img, 20, 80);
         DOMURL.revokeObjectURL(url);
 

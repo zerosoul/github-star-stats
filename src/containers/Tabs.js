@@ -103,7 +103,7 @@ export default function TabsContainer({ loading, activeTab = 1, data, repo }) {
         />
       ) : null}
       <div className="divide"></div>
-      {percent == 100 ? <Download title={`${repo.owner}/${repo.name}`} svg={svgQuery} /> : null}
+      {percent == 100 ? <Download title={`${repo.owner}/${repo.name}`} svg={svgQuery} sourceData={data} /> : null}
     </div>
   );
   return (
