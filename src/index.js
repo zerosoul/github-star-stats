@@ -9,7 +9,7 @@ import { ApolloProvider, HttpLink } from '@apollo/client';
 // import { ConfigProvider } from 'antd';
 // 由于 antd 组件的默认文案是英文，所以需要修改为中文
 // import zhCN from 'antd/es/locale/zh_CN';
-console.log(process.env);
+console.log({ process }, process.env.G_TOKEN);
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists

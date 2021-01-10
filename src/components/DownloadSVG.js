@@ -2,7 +2,7 @@ import React from 'react';
 import { DownloadOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
-function triggerDownload(imgURI, imgName = 'awesome') {
+function triggerDownload(imgURI, imgName = 'awesome', cb) {
   var evt = new MouseEvent('click', {
     view: window,
     bubbles: false,
@@ -15,6 +15,8 @@ function triggerDownload(imgURI, imgName = 'awesome') {
   a.setAttribute('target', '_blank');
 
   a.dispatchEvent(evt);
+
+  cb && cb();
 }
 function saveSource(data, filename) {
   if (!data) {
@@ -53,7 +55,6 @@ export default function DownloadSVG({ title = 'wtf title', svg = null, sourceDat
   const handleClick = () => {
     const scaleRatio = 1;
     console.log({ svg });
-    saveSource(sourceData);
     // 传入的是查询字符串
     if (typeof svg === 'string') {
       svg = document.querySelector(svg);
@@ -98,7 +99,9 @@ export default function DownloadSVG({ title = 'wtf title', svg = null, sourceDat
 
         let imgURI = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
 
-        triggerDownload(imgURI, title.split('/').join('.'));
+        triggerDownload(imgURI, title.split('/').join('.'), () => {
+          saveSource(sourceData);
+        });
         // svg.currentScale = 1;
       };
 
