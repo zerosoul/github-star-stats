@@ -18,12 +18,22 @@ Visit: [http://stars.yangerxiao.com](http://stars.yangerxiao.com). Input the git
 
 ![star data result](demo/result.png)
 
+## Run 
+
+`git clone --depth=1 https://github.com/zerosoul/github-star-stats.git`
+
+`cd github-star-stats & yarn install`
+
+Remember to set environment variable `VITE_G_TOKEN` to yourself in `.env*` file
+
+`yarn dev`
+
 ## Thanks
 
 - [Github API v4](https://developer.github.com/v4/)
 - [apollo graphql](https://apollographql.com/docs/react/)
-- [create-react-app](https://github.com/facebook/create-react-app)
 - [react.js](https://reactjs.org)
+- vite
 - [Recharts](http://recharts.org/)
 - [antd](https://ant.design)
 - [styled-components](https://styled-components.com): CSS-IN-JS Best Practice

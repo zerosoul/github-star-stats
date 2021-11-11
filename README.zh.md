@@ -18,12 +18,19 @@
 - 可导出图片 🖼
 
 ![star data result](demo/result.png)
+## 本地开发 
 
+`git clone --depth=1 https://github.com/zerosoul/github-star-stats.git`
+
+`cd github-star-stats & yarn install`
+
+记得把环境变量 `VITE_G_TOKEN` 设置为自己的token(用于发起GitHub相关数据请求)，为了脱敏，代码库`.env`类的文件依赖没有，可以自己建一个
+
+`yarn dev`
 ## 感谢
 
 - [Github API v4](https://developer.github.com/v4/)
 - [apollo graphql](https://apollographql.com/docs/react/)
-- [create-react-app](https://github.com/facebook/create-react-app)
 - [react.js](https://reactjs.org)
 - [Recharts](http://recharts.org/)
 - [antd](https://ant.design)

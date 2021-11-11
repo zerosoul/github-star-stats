@@ -1,13 +1,35 @@
 import { useState, useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
-import { GetStars } from './query.graphql';
+import { useLazyQuery, gql } from '@apollo/client';
 
 export default function useStars() {
   const [loading, setLoading] = useState(false);
   const [finished, setFinished] = useState(false);
   const [repo, setRepo] = useState(null);
   const [data, setData] = useState(undefined);
-  const [loadStars, { called, data: pageData, variables, error }] = useLazyQuery(GetStars);
+  const [loadStars, { called, data: pageData, variables, error }] = useLazyQuery(gql`
+    query GetStars($name: String!, $owner: String!, $after: String) {
+      repository(name: $name, owner: $owner) {
+        createdAt
+        stargazers(first: 100, after: $after) {
+          edges {
+            node {
+              id
+              login
+              name
+              avatarUrl
+            }
+            starredAt
+          }
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          totalCount
+        }
+      }
+    }
+  `);
 
   useEffect(() => {
     if (pageData) {
@@ -28,8 +50,8 @@ export default function useStars() {
           tmpObj[keyVal] = tmpObj[keyVal]
             ? tmpObj[keyVal]
             : oldData[keyVal]
-            ? oldData[keyVal]
-            : null;
+              ? oldData[keyVal]
+              : null;
           if (tmpObj[keyVal]) {
             tmpObj[keyVal].count = tmpObj[keyVal].count + 1;
             tmpObj[keyVal].users = [...tmpObj[keyVal].users, { ...node, starredAt }];

@@ -1,9 +1,17 @@
 import { useCallback, useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
-import { GetStarTotal } from './query.graphql';
+import { useLazyQuery, gql } from '@apollo/client';
 
 export default function useStarTotal() {
-  const [getTotal, { data, loading, error }] = useLazyQuery(GetStarTotal);
+  const [getTotal, { data, loading, error }] = useLazyQuery(gql`
+    query GetStarTotal($name: String!, $owner: String!) {
+      repository(name: $name, owner: $owner) {
+        url
+        stargazers {
+          totalCount
+        }
+      }
+    }
+  `);
 
   const getTotalCount = useCallback(
     ({ owner, name }) => {
