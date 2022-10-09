@@ -1,5 +1,4 @@
-import ReactDOM from 'react-dom';
-
+import ReactDOM from "react-dom/client";
 import { ApolloClient } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { InMemoryCache } from '@apollo/client/cache';
@@ -31,14 +30,14 @@ const client = new ApolloClient({
   link: authLink.concat(new HttpLink({ uri: 'https://api.github.com/graphql' })),
   cache: new InMemoryCache()
 });
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-ReactDOM.render(
+root.render(
   <>
     <GlobalStyle />
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
-  </>,
-  document.getElementById('root')
+  </>
 );
 

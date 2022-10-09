@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import styleImport from 'vite-plugin-style-import'
+import * as styleImport from 'vite-plugin-style-import'
 import pkg from './package.json';
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     port: 3009
   },
-  plugins: [styleImport({
+  plugins: [styleImport.createStyleImportPlugin({
     libs: [
       {
         libraryName: 'antd',
@@ -23,16 +23,6 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
-      },
-    },
-  },
-  build: {
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        //生产环境时移除console
-        drop_console: true,
-        drop_debugger: true,
       },
     },
   },
