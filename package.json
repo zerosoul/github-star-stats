@@ -4,7 +4,7 @@
   "description": "Awesome github repo star tool",
   "main": "main.jsx",
   "scripts": {
-    "start": "vite",
+    "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
     "prepare": "husky install"
